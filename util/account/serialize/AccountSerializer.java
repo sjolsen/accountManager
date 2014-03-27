@@ -3,8 +3,6 @@ package accountManager.util.account.serialize;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.Reader;
-import java.io.Writer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -40,7 +38,5 @@ public class AccountSerializer
 		int ID = Integer.parseInt (ID_string);
 		double amount = Double.parseDouble (amount_string);
 		return new Account (ID, name, new USDMoney (amount));
-	}
-	
-	
+	}	
 }
