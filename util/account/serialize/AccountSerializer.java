@@ -15,19 +15,9 @@ public class AccountSerializer
 {
 	private static final Pattern format = Pattern.compile ("^\\s*(\\d+)\\s*\\|\\s*([\\sa-zA-Z]+)\\s*\\|\\s*(\\d+\\.\\d+)\\s*$");
 	
-	public static void serialize (Account account, Writer writer)
-	{
-		serialize (account, new PrintWriter (writer));
-	}
-	
 	public static void serialize (Account account, PrintWriter writer)
 	{
 		writer.printf ("%d | $s | %f\n", account.getID (), account.getName (), account.getMoney ().getCanonicalAmount ());
-	}
-	
-	public static Account deserialize (Reader reader) throws IOException, MalformedAccountException
-	{
-		return deserialize (new BufferedReader (reader));
 	}
 	
 	public static Account deserialize (BufferedReader reader) throws IOException, MalformedAccountException
