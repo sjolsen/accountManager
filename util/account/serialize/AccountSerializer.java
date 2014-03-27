@@ -1,9 +1,10 @@
 package accountManager.util.account.serialize;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.Reader;
+import java.io.Writer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -14,9 +15,14 @@ public class AccountSerializer
 {
 	private static final Pattern format = Pattern.compile ("^\\s*(\\d+)\\s*\\|\\s*([\\sa-zA-Z]+)\\s*\\|\\s*(\\d+\\.\\d+)\\s*$");
 	
-	public static void serialize (Account account, BufferedWriter writer)
+	public static void serialize (Account account, Writer writer)
 	{
-		
+		serialize (account, new PrintWriter (writer));
+	}
+	
+	public static void serialize (Account account, PrintWriter writer)
+	{
+		writer.printf ("%d | $s | %f\n", account.getID (), account.getName (), account.getMoney ().getCanonicalAmount ());
 	}
 	
 	public static Account deserialize (Reader reader) throws IOException, MalformedAccountException
