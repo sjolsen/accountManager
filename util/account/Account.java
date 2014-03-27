@@ -4,8 +4,8 @@ import accountManager.util.money.*;
 
 public class Account
 {
-	private int ID;
-	private String name;
+	private final int ID;
+	private final String name;
 	private Money money;
 	
 	public Account (int ID, String name, Money money)
