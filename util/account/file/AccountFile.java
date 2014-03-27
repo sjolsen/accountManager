@@ -26,15 +26,10 @@ public class AccountFile
 		AccountList accounts = new AccountList ();
 		BufferedReader reader = new BufferedReader (new FileReader (filename));
 		
-        	try
-        	{
-        		while (true)
-        			accounts.addAccount (AccountSerializer.deserialize (reader));
-        	}
-        	catch (IOException e) // End of file
-        	{
-        	}
-				
+		Account account;
+		while ((account = AccountSerializer.deserialize (reader)) != null)
+       			accounts.addAccount (account);
+        	
 		return accounts;
 	}
 	
