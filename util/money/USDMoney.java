@@ -6,12 +6,12 @@ public class USDMoney extends AbstractMoney
 	private static final String short_symbol = "$";
 	private static final double exchange_rate = 1;
 	
-	USDMoney (Money amount)
+	public USDMoney (Money amount)
 	{
 		super (amount);
 	}
 	
-	USDMoney (double amount)
+	public USDMoney (double amount)
 	{
 		super (amount);
 	}

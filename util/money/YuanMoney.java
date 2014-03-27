@@ -6,12 +6,12 @@ public class YuanMoney extends AbstractMoney
 	private static final String short_symbol = "¥";
 	private static final double exchange_rate = 6.2;
 	
-	YuanMoney (Money amount)
+	public YuanMoney (Money amount)
 	{
 		super (amount);
 	}
 	
-	YuanMoney (double amount)
+	public YuanMoney (double amount)
 	{
 		super (amount);
 	}

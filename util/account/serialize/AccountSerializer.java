@@ -8,6 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import accountManager.util.account.Account;
+import accountManager.util.money.USDMoney;
 
 public class AccountSerializer
 {
@@ -18,19 +19,31 @@ public class AccountSerializer
 		
 	}
 	
-	public static Account deserialize (Reader stream) throws IOException
+	public static Account deserialize (Reader stream) throws IOException, MalformedAccountException
 	{
 		BufferedReader reader = new BufferedReader (stream);
 		return deserialize (reader);
 	}
 	
-	public static Account deserialize (BufferedReader reader) throws IOException
+	public static Account deserialize (BufferedReader reader) throws IOException, MalformedAccountException
 	{
 		String line = reader.readLine ();
 		Matcher tokenizer = format.matcher (line);
 		
 		String ID_string = tokenizer.group (1);
+		if (ID_string == null)
+			throw new MalformedAccountException (line);
+		
 		String name = tokenizer.group (2);
-		String amount = tokenizer.group (3);
+		if (name == null)
+			throw new MalformedAccountException (line);
+		
+		String amount_string = tokenizer.group (3);
+		if (amount_string == null)
+			throw new MalformedAccountException (line);
+		
+		int ID = Integer.parseInt (ID_string);
+		double amount = Double.parseDouble (amount_string);
+		return new Account (ID, name, new USDMoney (amount));
 	}
 }

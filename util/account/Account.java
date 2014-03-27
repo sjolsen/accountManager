@@ -4,25 +4,25 @@ import accountManager.util.money.*;
 
 public class Account
 {
-	private String name;
 	private int ID;
+	private String name;
 	private Money money;
 	
-	Account (String name, int ID, Money money)
+	public Account (int ID, String name, Money money)
 	{
-		this.name = name;
 		this.ID = ID;
+		this.name = name;
 		this.money = money;
-	}
-	
-	public String getName ()
-	{
-		return name;
 	}
 	
 	public int getID ()
 	{
 		return ID;
+	}
+	
+	public String getName ()
+	{
+		return name;
 	}
 	
 	public Money getMoney ()

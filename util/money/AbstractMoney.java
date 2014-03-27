@@ -4,12 +4,12 @@ public abstract class AbstractMoney implements Money
 {
 	private final double amount;
 	
-	AbstractMoney (double amount)
+	public AbstractMoney (double amount)
 	{
 		this.amount = amount;
 	}
 	
-	AbstractMoney (Money amount)
+	public AbstractMoney (Money amount)
 	{
 		this.amount = amount.getCanonicalAmount ().getAmount () * this.exchangeRate ();
 	}

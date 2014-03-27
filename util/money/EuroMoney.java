@@ -6,12 +6,12 @@ public class EuroMoney extends AbstractMoney
 	private static final String short_symbol = "€";
 	private static final double exchange_rate = 0.72;
 	
-	EuroMoney (Money amount)
+	public EuroMoney (Money amount)
 	{
 		super (amount);
 	}
 	
-	EuroMoney (double amount)
+	public EuroMoney (double amount)
 	{
 		super (amount);
 	}
