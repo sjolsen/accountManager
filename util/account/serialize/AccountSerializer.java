@@ -1,14 +1,13 @@
 package accountManager.util.account.serialize;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.LineNumberReader;
 import java.io.Reader;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import accountManager.util.account.Account;
-import accountManager.util.account.LineNumberedAccount;
 import accountManager.util.money.USDMoney;
 
 public class AccountSerializer
@@ -22,12 +21,11 @@ public class AccountSerializer
 	
 	public static Account deserialize (Reader reader) throws IOException, MalformedAccountException
 	{
-		return deserialize (new LineNumberReader (reader));
+		return deserialize (new BufferedReader (reader));
 	}
 	
-	public static Account deserialize (LineNumberReader reader) throws IOException, MalformedAccountException
+	public static Account deserialize (BufferedReader reader) throws IOException, MalformedAccountException
 	{
-		int line_number = reader.getLineNumber ();
 		String line = reader.readLine ();
 		Matcher tokenizer = format.matcher (line);
 		
@@ -45,7 +43,7 @@ public class AccountSerializer
 		
 		int ID = Integer.parseInt (ID_string);
 		double amount = Double.parseDouble (amount_string);
-		return new LineNumberedAccount (line_number, ID, name, new USDMoney (amount));
+		return new Account (ID, name, new USDMoney (amount));
 	}
 	
 	
