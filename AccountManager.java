@@ -5,13 +5,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import accountManager.controller.Controller;
-import accountManager.model.Model;
 import accountManager.model.account.Account;
 import accountManager.model.account.AccountList;
 import accountManager.model.account.file.AccountFile;
 import accountManager.model.account.serialize.AccountSerializer;
 import accountManager.model.account.serialize.MalformedAccountException;
-import accountManager.view.View;
 
 public class AccountManager
 {
@@ -26,9 +24,7 @@ public class AccountManager
 	
 	public static void windowTest (String [] args) throws MalformedAccountException, IOException
 	{
-		Model model = new Model (new File (args [0]));
-		Controller controller = new Controller (model);
-		new View (controller, model);
+		Controller controller = new Controller (new File (args [0]));
 	}
 	
 	public static void main (String [] args)

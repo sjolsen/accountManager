@@ -18,6 +18,11 @@ public class Model
 		this.accounts = file.readAllAccounts ();
 	}
 	
+	public AccountFile getFile ()
+	{
+		return file;
+	}
+	
 	public AccountList getAccounts ()
 	{
 		return accounts;
