@@ -1,4 +1,4 @@
-package accountManager.util.account.file;
+package accountManager.model.account.file;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -7,10 +7,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import accountManager.util.account.Account;
-import accountManager.util.account.AccountList;
-import accountManager.util.account.serialize.AccountSerializer;
-import accountManager.util.account.serialize.MalformedAccountException;
+import accountManager.model.account.Account;
+import accountManager.model.account.AccountList;
+import accountManager.model.account.serialize.AccountSerializer;
+import accountManager.model.account.serialize.MalformedAccountException;
 
 public class AccountFile
 {

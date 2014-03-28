@@ -7,7 +7,7 @@ import javax.swing.JList;
 
 import accountManager.controller.Controller;
 import accountManager.model.Model;
-import accountManager.util.account.Account;
+import accountManager.model.account.Account;
 
 public class MainWindow
 {

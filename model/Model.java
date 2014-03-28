@@ -3,9 +3,9 @@ package accountManager.model;
 import java.io.File;
 import java.io.IOException;
 
-import accountManager.util.account.AccountList;
-import accountManager.util.account.file.AccountFile;
-import accountManager.util.account.serialize.MalformedAccountException;
+import accountManager.model.account.AccountList;
+import accountManager.model.account.file.AccountFile;
+import accountManager.model.account.serialize.MalformedAccountException;
 
 public class Model
 {

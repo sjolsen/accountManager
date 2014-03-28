@@ -1,4 +1,4 @@
-package accountManager.util.account.serialize;
+package accountManager.model.account.serialize;
 
 import java.text.ParseException;
 

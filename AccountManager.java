@@ -6,11 +6,11 @@ import java.io.PrintWriter;
 
 import accountManager.controller.Controller;
 import accountManager.model.Model;
-import accountManager.util.account.Account;
-import accountManager.util.account.AccountList;
-import accountManager.util.account.file.AccountFile;
-import accountManager.util.account.serialize.AccountSerializer;
-import accountManager.util.account.serialize.MalformedAccountException;
+import accountManager.model.account.Account;
+import accountManager.model.account.AccountList;
+import accountManager.model.account.file.AccountFile;
+import accountManager.model.account.serialize.AccountSerializer;
+import accountManager.model.account.serialize.MalformedAccountException;
 import accountManager.view.ui.MainWindow;
 
 public class AccountManager

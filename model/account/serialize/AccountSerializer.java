@@ -1,4 +1,4 @@
-package accountManager.util.account.serialize;
+package accountManager.model.account.serialize;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -6,7 +6,7 @@ import java.io.PrintWriter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import accountManager.util.account.Account;
+import accountManager.model.account.Account;
 import accountManager.util.money.USDMoney;
 
 public class AccountSerializer

@@ -1,4 +1,4 @@
-package accountManager.util.account;
+package accountManager.model.account;
 
 import accountManager.util.money.*;
 
