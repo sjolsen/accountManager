@@ -1,25 +1,18 @@
 package accountManager.util.account;
 
-import java.util.Collection;
-import java.util.SortedMap;
-import java.util.TreeMap;
+import java.util.Vector;
 
 public class AccountList
 {
-	private final SortedMap <Integer, Account> accounts = new TreeMap <Integer, Account> ();
+	private final Vector <Account> accounts = new Vector <Account> ();
 	
 	public void addAccount (Account account)
 	{
-		accounts.put (account.getID (), account);
+		accounts.add (account);
 	}
 	
-	public Account getAccountByID (int ID)
+	public Vector <Account> getAccounts ()
 	{
-		return accounts.get (ID);
-	}
-	
-	public Collection <Account> getAccounts ()
-	{
-		return accounts.values ();
+		return accounts;
 	}
 }

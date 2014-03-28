@@ -1,6 +1,6 @@
 package accountManager.view;
 
-public interface View
+public class View
 {
 
 }

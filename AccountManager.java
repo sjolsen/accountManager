@@ -4,11 +4,14 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import accountManager.controller.Controller;
+import accountManager.model.Model;
 import accountManager.util.account.Account;
 import accountManager.util.account.AccountList;
 import accountManager.util.account.file.AccountFile;
 import accountManager.util.account.serialize.AccountSerializer;
 import accountManager.util.account.serialize.MalformedAccountException;
+import accountManager.view.ui.MainWindow;
 
 public class AccountManager
 {
@@ -21,11 +24,18 @@ public class AccountManager
 			AccountSerializer.serialize (account, new PrintWriter (System.out));
 	}
 	
+	public static void windowTest (String [] args) throws MalformedAccountException, IOException
+	{
+		Model model = new Model (new File (args [0]));
+		Controller controller = new Controller (model);
+		new MainWindow (controller, model);
+	}
+	
 	public static void main (String [] args)
 	{
 		try
                 {
-	                test (args);
+	                windowTest (args);
                 }
                 catch (MalformedAccountException e)
                 {
