@@ -11,7 +11,7 @@ import accountManager.model.account.AccountList;
 import accountManager.model.account.file.AccountFile;
 import accountManager.model.account.serialize.AccountSerializer;
 import accountManager.model.account.serialize.MalformedAccountException;
-import accountManager.view.ui.MainWindow;
+import accountManager.view.View;
 
 public class AccountManager
 {
@@ -28,7 +28,7 @@ public class AccountManager
 	{
 		Model model = new Model (new File (args [0]));
 		Controller controller = new Controller (model);
-		new MainWindow (controller, model);
+		new View (controller, model);
 	}
 	
 	public static void main (String [] args)

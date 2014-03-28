@@ -1,36 +1,25 @@
 package accountManager.view.ui;
 
-import java.awt.Container;
-
 import javax.swing.JFrame;
 import javax.swing.JList;
 
-import accountManager.controller.Controller;
-import accountManager.model.Model;
 import accountManager.model.account.Account;
+import accountManager.model.account.AccountList;
 
-public class MainWindow
+public class MainWindow extends JFrame
 {
-	private Controller controller;
-	private Model model;
-	
-	private JFrame window;
-	private Container window_contents;
 	private JList <Account> account_list;
 
-	public MainWindow (Controller controller, Model model)
+	public MainWindow (AccountList accounts)
 	{
-		this.controller = controller;
-		this.model = model;
 		
-		this.window = new JFrame ("Account Manager");
-		this.window_contents = window.getContentPane ();
-		window.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
-		
-		this.account_list = new JList <Account> (model.getAccounts ().getAccounts ());
-		window_contents.add (account_list);
-		
-		window.pack ();
-		window.setVisible (true);
+		super ("Account Manager");
+
+		this.account_list = new JList <Account> (accounts.getAccounts ());
+ 		getContentPane ().add (account_list);
+
+		setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
+		pack ();
+		setVisible (true);
 	}
 }
