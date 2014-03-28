@@ -13,27 +13,28 @@ import javax.swing.JPanel;
 
 import accountManager.model.account.Account;
 import accountManager.model.account.AccountList;
+import accountManager.view.View;
 
 public class MainWindow extends JFrame
 {
 	private static final long serialVersionUID = -2025399850666074771L;
-	
 	private static final int BORDER = 3;
 	
-	private JPanel panel;
+	private View view;
 	
+	private JPanel panel;
 	private AccountSelector selector;
 	private JList <Account> account_list;
-	
+
 	private JPanel control_area;
-	
-	private JPanel button_panel;
+	private JPanel button_panel;	
 	private JButton save_button;
 	private JButton exit_button;
 
-	public MainWindow (AccountList accounts)
+	public MainWindow (View view, AccountList accounts)
 	{
 		super ("Account Manager");
+		this.view = view;
 		
 		panel = new JPanel ();
 		panel.setLayout (new BoxLayout (panel, BoxLayout.X_AXIS));
@@ -55,8 +56,12 @@ public class MainWindow extends JFrame
 		button_panel.setLayout (new BoxLayout (button_panel, BoxLayout.X_AXIS));
 		
 		save_button = new JButton ("Save");
+		save_button.setActionCommand ("MainWindow.save");
+		save_button.addActionListener (view);
 		getRootPane ().setDefaultButton (save_button);
 		exit_button = new JButton ("Exit");
+		exit_button.setActionCommand ("MainWindow.exit");
+		exit_button.addActionListener (view);
 		
 		button_panel.add (Box.createHorizontalGlue ());
 		button_panel.add (exit_button, BorderLayout.EAST);

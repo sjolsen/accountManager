@@ -25,5 +25,7 @@ public class Controller
 
 	public void exit ()
 	{
+		model.cleanup ();
+		view.cleanup ();
 	}
 }
