@@ -11,16 +11,15 @@ import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JPanel;
 
+import accountManager.controller.Controller;
+import accountManager.model.Model;
 import accountManager.model.account.Account;
-import accountManager.model.account.AccountList;
-import accountManager.view.View;
+import accountManager.view.Window;
 
-public class MainWindow extends JFrame
+@SuppressWarnings ("serial")
+public class MainWindow extends Window
 {
-	private static final long serialVersionUID = -2025399850666074771L;
 	private static final int BORDER = 3;
-	
-	private View view;
 	
 	private JPanel panel;
 	private AccountSelector selector;
@@ -31,17 +30,16 @@ public class MainWindow extends JFrame
 	private JButton save_button;
 	private JButton exit_button;
 
-	public MainWindow (View view, AccountList accounts)
+	public MainWindow (Controller controller, Model model)
 	{
-		super ("Account Manager");
-		this.view = view;
+		super ("Account Manager", controller, model);
 		
 		panel = new JPanel ();
 		panel.setLayout (new BoxLayout (panel, BoxLayout.X_AXIS));
 		panel.setBorder (BorderFactory.createEmptyBorder(BORDER, BORDER, BORDER, BORDER));
 		getContentPane ().add (panel);
 
-		selector = new AccountSelector (accounts);
+		selector = new AccountSelector (model.getAccounts ());
 		account_list = selector.getAccountList ();
 		panel.add (selector.getJComponent ());
 
@@ -54,14 +52,22 @@ public class MainWindow extends JFrame
 
 		button_panel = new JPanel ();
 		button_panel.setLayout (new BoxLayout (button_panel, BoxLayout.X_AXIS));
-		
-		save_button = new JButton ("Save");
-		save_button.setActionCommand ("MainWindow.save");
-		save_button.addActionListener (view);
+
+		save_button = new CallbackButton ("Save") {
+			@Override
+			public void onClicked ()
+			{
+				MainWindow.this.controller.save ();
+			}
+		};
 		getRootPane ().setDefaultButton (save_button);
-		exit_button = new JButton ("Exit");
-		exit_button.setActionCommand ("MainWindow.exit");
-		exit_button.addActionListener (view);
+		exit_button = new CallbackButton ("Exit") {
+			@Override
+			public void onClicked ()
+			{
+				MainWindow.this.controller.exit ();
+			}
+		};
 		
 		button_panel.add (Box.createHorizontalGlue ());
 		button_panel.add (exit_button, BorderLayout.EAST);
