@@ -9,6 +9,7 @@ import java.io.PrintWriter;
 
 import accountManager.model.account.Account;
 import accountManager.model.account.AccountList;
+import accountManager.model.account.DuplicateAccountException;
 import accountManager.model.account.serialize.AccountSerializer;
 import accountManager.model.account.serialize.MalformedAccountException;
 
@@ -21,7 +22,7 @@ public class AccountFile
 		this.filename = filename;
 	}
 	
-	public AccountList readAllAccounts () throws MalformedAccountException, IOException
+	public AccountList readAllAccounts () throws MalformedAccountException, IOException, DuplicateAccountException
 	{
 		AccountList accounts = new AccountList ();
 		BufferedReader reader = new BufferedReader (new FileReader (filename));
@@ -37,7 +38,7 @@ public class AccountFile
 	{
 		PrintWriter writer = new PrintWriter (new FileWriter (filename));
 		
-		for (Account account : accounts.getAccounts ())
+		for (Account account : accounts)
 			AccountSerializer.serialize (account, writer);
 	}
 }

@@ -1,34 +1,35 @@
 package accountManager.controller;
 
-import java.io.File;
 import java.io.IOException;
 
 import accountManager.model.Model;
 import accountManager.model.account.Account;
-import accountManager.model.account.serialize.MalformedAccountException;
-import accountManager.view.ui.MainWindow;
+import accountManager.model.money.Money;
 
 public class Controller
 {
 	private Model model;
-	private MainWindow main_window;
 	
-	public Controller (File filename) throws MalformedAccountException, IOException
+	public Controller (Model model)
 	{
-		this.model = new Model (filename);
-		this.main_window = new MainWindow (this, model);
+		this.model = model;
 	}
 
-	public void edit (Account account)
+	public void withdraw (Account account, Money amount)
 	{
+		account.setMoney (account.getMoney ().minus (amount));
+	}
 
+	public void deposit (Account account, Money amount)
+	{
+		account.setMoney (account.getMoney ().plus (amount));
 	}
 
 	public void save ()
 	{
 		try
                 {
-	                model.getFile ().writeAllAccounts (model.getAccounts ());
+	                model.syncWithFile ();
                 }
                 catch (IOException e)
                 {
@@ -39,8 +40,5 @@ public class Controller
 
 	public void exit ()
 	{
-		save ();
-		model.cleanup ();
-		main_window.cleanup ();
 	}
 }

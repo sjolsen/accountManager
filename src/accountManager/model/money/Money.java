@@ -1,4 +1,4 @@
-package accountManager.util.money;
+package accountManager.model.money;
 
 public interface Money
 {
@@ -6,4 +6,7 @@ public interface Money
 	String currencyLongSymbol ();
 	String currencyShortSymbol ();
 	double getAmount ();
+	
+	Money plus (Money other);
+	Money minus (Money other);
 }

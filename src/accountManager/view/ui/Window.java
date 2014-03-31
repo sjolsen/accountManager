@@ -1,12 +1,13 @@
-package accountManager.view;
+package accountManager.view.ui;
 
 import javax.swing.JFrame;
 
 import accountManager.controller.Controller;
 import accountManager.model.Model;
+import accountManager.view.View;
 
 @SuppressWarnings ("serial")
-public abstract class Window extends JFrame
+public abstract class Window extends JFrame implements View
 {
 	protected Controller controller;
 	protected Model model;
@@ -18,7 +19,8 @@ public abstract class Window extends JFrame
 		this.model = model;
 	}
 
-	public void cleanup ()
+	@Override
+        public void close ()
         {
 	        setVisible (false);
 	        dispose ();

@@ -7,11 +7,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import accountManager.model.account.Account;
-import accountManager.util.money.USDMoney;
+import accountManager.model.money.USDMoney;
 
 public class AccountSerializer
 {
-	private static final Pattern format = Pattern.compile ("^\\s*(\\d+)\\s*\\|\\s*([\\sa-zA-Z]+)\\s*\\|\\s*(\\d*\\.?\\d+)\\s*$");
+	private static final Pattern format = Pattern.compile ("^\\s*(\\d+)\\s*\\|\\s*([\\sa-zA-Z]+?)\\s*\\|\\s*(\\d*\\.?\\d+)\\s*$");
 	
 	public static void serialize (Account account, PrintWriter writer)
 	{

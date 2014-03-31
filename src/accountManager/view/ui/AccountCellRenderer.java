@@ -7,7 +7,7 @@ import javax.swing.JList;
 import javax.swing.ListCellRenderer;
 
 import accountManager.model.account.Account;
-import accountManager.util.money.Money;
+import accountManager.model.money.Money;
 
 public class AccountCellRenderer implements ListCellRenderer <Account>
 {

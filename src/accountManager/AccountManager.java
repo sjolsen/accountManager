@@ -1,45 +1,75 @@
 package accountManager;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.swing.UIManager;
 
 import accountManager.controller.Controller;
+import accountManager.model.Model;
 import accountManager.model.account.Account;
-import accountManager.model.account.AccountList;
-import accountManager.model.account.file.AccountFile;
-import accountManager.model.account.serialize.AccountSerializer;
-import accountManager.model.account.serialize.MalformedAccountException;
+import accountManager.model.money.USDMoney;
 
 public class AccountManager
 {
-	public static void test (String [] args) throws MalformedAccountException, IOException
+	public static void windowTest (File file)
 	{
-		AccountFile file = new AccountFile (new File (args [0]));
-		AccountList list = file.readAllAccounts ();
-		
-		for (Account account : list.getAccounts ())
-			AccountSerializer.serialize (account, new PrintWriter (System.out));
-	}
-	
-	public static void windowTest (String [] args) throws MalformedAccountException, IOException
-	{
-		Controller controller = new Controller (new File (args [0]));
-	}
-	
-	public static void main (String [] args)
-	{
-		try
+                try
                 {
-	                UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-	                windowTest (args);
+	                UIManager.setLookAndFeel (UIManager.getSystemLookAndFeelClassName ());
+			Model model = new Model (file);
+			Controller controller = new Controller (model);
                 }
                 catch (Exception e)
                 {
 	                // TODO Auto-generated catch block
 	                e.printStackTrace();
                 }
+	}
+	
+	public static void depositTest (File file)
+	{
+		try
+                {
+	                Model model = new Model (file);
+			Controller controller = new Controller (model);
+			
+			for (Account account : model.getAccounts ())
+				controller.deposit (account, new USDMoney (10));
+			controller.save ();
+                }
+                catch (Exception e)
+                {
+	                // TODO Auto-generated catch block
+	                e.printStackTrace();
+                }
+	}
+	
+	public static void withdrawTest (File file)
+	{
+		try
+                {
+	                Model model = new Model (file);
+			Controller controller = new Controller (model);
+			
+			for (Account account : model.getAccounts ())
+				controller.withdraw (account, new USDMoney (10));
+			controller.save ();
+                }
+                catch (Exception e)
+                {
+	                // TODO Auto-generated catch block
+	                e.printStackTrace();
+                }
+	}
+	
+	public static void main (String [] args)
+	{
+		if (args.length < 1)
+		{
+			System.err.println ("Must specify an account file");
+			return;
+		}
+		
+		withdrawTest (new File (args [0]));
 	}
 }

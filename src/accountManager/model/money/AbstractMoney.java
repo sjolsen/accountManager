@@ -1,4 +1,4 @@
-package accountManager.util.money;
+package accountManager.model.money;
 
 public abstract class AbstractMoney implements Money
 {
@@ -24,5 +24,15 @@ public abstract class AbstractMoney implements Money
 	public double getAmount ()
 	{
 		return amount;
+	}
+	
+	public Money plus (Money other)
+	{
+		return new USDMoney (getCanonicalAmount ().getAmount () + other.getCanonicalAmount ().getAmount ());
+	}
+
+	public Money minus (Money other)
+	{
+		return new USDMoney (getCanonicalAmount ().getAmount () - other.getCanonicalAmount ().getAmount ());
 	}
 }

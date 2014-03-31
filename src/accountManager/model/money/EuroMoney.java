@@ -1,4 +1,4 @@
-package accountManager.util.money;
+package accountManager.model.money;
 
 public class EuroMoney extends AbstractMoney
 {

@@ -8,13 +8,10 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JList;
 import javax.swing.JPanel;
 
 import accountManager.controller.Controller;
 import accountManager.model.Model;
-import accountManager.model.account.Account;
-import accountManager.view.Window;
 
 @SuppressWarnings ("serial")
 public class MainWindow extends Window
@@ -23,7 +20,6 @@ public class MainWindow extends Window
 	
 	private JPanel panel;
 	private AccountSelector selector;
-	private JList <Account> account_list;
 
 	private JPanel control_area;
 	private JPanel button_panel;	
@@ -40,7 +36,6 @@ public class MainWindow extends Window
 		getContentPane ().add (panel);
 
 		selector = new AccountSelector (model.getAccounts ());
-		account_list = selector.getAccountList ();
 		panel.add (selector.getJComponent ());
 
 		panel.add (Box.createRigidArea (new Dimension(BORDER, 0)));

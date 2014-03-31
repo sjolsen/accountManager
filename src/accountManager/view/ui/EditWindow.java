@@ -3,7 +3,6 @@ package accountManager.view.ui;
 import accountManager.controller.Controller;
 import accountManager.model.Model;
 import accountManager.model.account.Account;
-import accountManager.view.Window;
 
 public class EditWindow extends Window
 {
