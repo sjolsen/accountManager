@@ -25,6 +25,13 @@ public class Controller
 
 	public void exit ()
 	{
+		try
+		{
+			save ();
+		}
+		catch (IOException e)
+		{
+		}
 		model.cleanup ();
 		view.cleanup ();
 	}

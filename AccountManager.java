@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.swing.UIManager;
+
 import accountManager.controller.Controller;
 import accountManager.model.account.Account;
 import accountManager.model.account.AccountList;
@@ -31,14 +33,10 @@ public class AccountManager
 	{
 		try
                 {
+	                UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 	                windowTest (args);
                 }
-                catch (MalformedAccountException e)
-                {
-	                // TODO Auto-generated catch block
-	                e.printStackTrace();
-                }
-                catch (IOException e)
+                catch (Exception e)
                 {
 	                // TODO Auto-generated catch block
 	                e.printStackTrace();
