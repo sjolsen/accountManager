@@ -18,8 +18,18 @@ public class Model
 		this.accounts = file.readAllAccounts ();
 	}
 	
+	public AccountFile getFile ()
+	{
+		return file;
+	}
+	
 	public AccountList getAccounts ()
 	{
 		return accounts;
 	}
+
+	public void cleanup ()
+        {
+	        // TODO Auto-generated method stub
+        }
 }
