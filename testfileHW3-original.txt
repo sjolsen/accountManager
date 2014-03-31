@@ -1,0 +1,6 @@
+ 1070       | Streeter        Angela M       | 34.4360509
+ 1008       | Iftikhar        Bushra         | 128.02000000
+ 1262       | Meuer Benjamin T               | 100
+ 1131       | Komati  Deepthi                | 223245.00
+ 1127       | Lowell  Daniel I               | 0.5678
+ 1002       | Cabello Israel Z               | 0.0
