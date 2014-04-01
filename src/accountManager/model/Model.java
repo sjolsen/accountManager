@@ -23,6 +23,11 @@ public class Model
 	{
 		return accounts;
 	}
+	
+	public String getFileName ()
+	{
+		return file.getName ();
+	}
 
 	public void syncWithFile () throws IOException
         {

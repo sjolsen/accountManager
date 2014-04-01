@@ -22,6 +22,11 @@ public class AccountFile
 		this.filename = filename;
 	}
 	
+	public String getName ()
+	{
+		return filename.getPath ();
+	}
+	
 	public AccountList readAllAccounts () throws MalformedAccountException, IOException, DuplicateAccountException
 	{
 		AccountList accounts = new AccountList ();

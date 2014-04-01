@@ -26,9 +26,9 @@ public class MainWindow extends Window
 	private JButton save_button;
 	private JButton exit_button;
 
-	public MainWindow (View view)
+	public MainWindow (View view, String pathname)
 	{
-		super ("Account Manager", view);
+		super (String.format ("Account Manager - %s", pathname), view);
 		
 		panel = new JPanel ();
 		panel.setLayout (new BoxLayout (panel, BoxLayout.X_AXIS));

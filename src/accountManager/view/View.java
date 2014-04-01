@@ -19,7 +19,7 @@ public class View
 	{
 		this.controller = controller;
 		this.account_list = new JList <Account> (controller.getModel ().getAccounts ());
-		this.main_window = new MainWindow (this);
+		this.main_window = new MainWindow (this, controller.getModel ().getFileName ());
 	}
 	
 	public JList <Account> getAccounts ()
