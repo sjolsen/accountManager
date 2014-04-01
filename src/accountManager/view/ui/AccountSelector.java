@@ -16,6 +16,8 @@ public class AccountSelector
 		scroll_pane = new JScrollPane ();
 		
 		account_list = accounts;
+		account_list.setSelectedIndex (0);
+		
 		account_list.setCellRenderer (new AccountCellRenderer ());
  		scroll_pane.setViewportView (account_list);
 	}
@@ -24,4 +26,9 @@ public class AccountSelector
 	{
 		return scroll_pane;
 	}
+
+	public Account getSelectedAccount ()
+        {
+	        return account_list.getSelectedValue ();
+        }
 }

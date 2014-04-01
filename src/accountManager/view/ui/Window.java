@@ -13,6 +13,7 @@ public abstract class Window extends JFrame
 	{
 		super (title);
 		this.view = view;
+		setDefaultCloseOperation (JFrame.DO_NOTHING_ON_CLOSE);
 	}
 
 	public void close ()

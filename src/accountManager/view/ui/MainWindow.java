@@ -8,45 +8,55 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import accountManager.view.View;
 
 @SuppressWarnings ("serial")
 public class MainWindow extends Window
-{
+{	
+	private class EditButton extends CallbackButton
+	{
+		private final View.Currency currency;
+
+		public EditButton (String designator, View.Currency currency)
+		{
+			super (String.format ("Edit in %s", designator));
+			this.currency = currency;
+		}
+
+		@Override
+		public void onClicked ()
+		{
+			MainWindow.this.view.edit (selector.getSelectedAccount (), currency);
+		}
+	}
+
 	private static final int BORDER = 3;
-	
-	private JPanel panel;
+
 	private AccountSelector selector;
 
-	private JPanel control_area;
-	private JPanel button_panel;	
+	private JButton USD_button;
+	private JButton EUR_button;
+	private JButton CNY_button;
+
 	private JButton save_button;
 	private JButton exit_button;
+
+	private JPanel panel;
+	private JPanel control_area;
+	private JPanel edit_panel;
+	private JPanel button_panel;	
 
 	public MainWindow (View view, String pathname)
 	{
 		super (String.format ("Account Manager - %s", pathname), view);
-		
-		panel = new JPanel ();
-		panel.setLayout (new BoxLayout (panel, BoxLayout.X_AXIS));
-		panel.setBorder (BorderFactory.createEmptyBorder (BORDER, BORDER, BORDER, BORDER));
-		getContentPane ().add (panel);
 
 		selector = new AccountSelector (view.getAccounts ());
-		panel.add (selector.getJComponent ());
 
-		panel.add (Box.createRigidArea (new Dimension (BORDER, 0)));
-		
-		control_area = new JPanel ();
-		control_area.setLayout (new BoxLayout (control_area, BoxLayout.Y_AXIS));
-		control_area.add (Box.createVerticalGlue ());
-		panel.add (control_area);
-
-		button_panel = new JPanel ();
-		button_panel.setLayout (new BoxLayout (button_panel, BoxLayout.X_AXIS));
+		USD_button = new EditButton ("USD", View.Currency.USD);
+		EUR_button = new EditButton ("EUR", View.Currency.EUR);
+		CNY_button = new EditButton ("CNY", View.Currency.CNY);
 
 		save_button = new CallbackButton ("Save") {
 			@Override
@@ -63,14 +73,7 @@ public class MainWindow extends Window
 				MainWindow.this.view.exit ();
 			}
 		};
-		
-		button_panel.add (Box.createHorizontalGlue ());
-		button_panel.add (exit_button, BorderLayout.EAST);
-		button_panel.add (Box.createRigidArea (new Dimension(BORDER, 0)));
-		button_panel.add (save_button, BorderLayout.WEST);
-		control_area.add (button_panel, BorderLayout.EAST);
 
-		setDefaultCloseOperation (JFrame.DO_NOTHING_ON_CLOSE);
 		addWindowListener (new NullWindowListener () {
 			@Override
 			public void windowClosing (WindowEvent e)
@@ -78,7 +81,38 @@ public class MainWindow extends Window
 				MainWindow.this.view.exit ();
 			}
 		});
-		
+
+		buildUI ();
+	}
+
+	private void buildUI ()
+	{
+		edit_panel = new JPanel ();
+		edit_panel.setLayout (new BoxLayout (edit_panel, BoxLayout.Y_AXIS));
+		edit_panel.add (USD_button);
+		edit_panel.add (EUR_button);
+		edit_panel.add (CNY_button);
+
+		button_panel = new JPanel ();
+		button_panel.setLayout (new BoxLayout (button_panel, BoxLayout.X_AXIS));
+		button_panel.add (Box.createHorizontalGlue ());
+		button_panel.add (exit_button, BorderLayout.EAST);
+		button_panel.add (Box.createRigidArea (new Dimension(BORDER, 0)));
+		button_panel.add (save_button, BorderLayout.WEST);
+
+		control_area = new JPanel ();
+		control_area.setLayout (new BorderLayout (BORDER, BORDER));
+		control_area.add (edit_panel, BorderLayout.CENTER);
+		control_area.add (button_panel, BorderLayout.SOUTH);
+
+		panel = new JPanel ();
+		panel.setLayout (new BoxLayout (panel, BoxLayout.X_AXIS));
+		panel.setBorder (BorderFactory.createEmptyBorder (BORDER, BORDER, BORDER, BORDER));
+		panel.add (selector.getJComponent ());
+		panel.add (Box.createRigidArea (new Dimension (BORDER, 0)));
+		panel.add (control_area);
+
+		getContentPane ().add (panel);
 		pack ();
 		setVisible (true);
 	}

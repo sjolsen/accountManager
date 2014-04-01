@@ -27,6 +27,18 @@ public class View
 		return account_list;
 	}
 	
+	public enum Currency
+	{
+		USD,
+		EUR,
+		CNY
+	}
+	
+	public void edit (Account account, Currency currency)
+	{
+		System.out.format ("Edit account %d in %s\n", account.getID (), currency.name ());
+	}
+	
 	public void save ()
 	{
 		try
