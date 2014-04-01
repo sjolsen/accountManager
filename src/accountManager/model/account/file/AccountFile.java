@@ -16,15 +16,17 @@ import accountManager.model.account.serialize.MalformedAccountException;
 public class AccountFile
 {
 	private final File filename;
+	private final String pathname;
 	
-	public AccountFile (File filename)
+	public AccountFile (File filename) throws IOException
 	{
 		this.filename = filename;
+		this.pathname = filename.getCanonicalPath ();
 	}
 	
-	public String getName ()
+	public String getPathname ()
 	{
-		return filename.getPath ();
+		return pathname;
 	}
 	
 	public AccountList readAllAccounts () throws MalformedAccountException, IOException, DuplicateAccountException

@@ -26,7 +26,7 @@ public class Model
 	
 	public String getFileName ()
 	{
-		return file.getName ();
+		return file.getPathname ();
 	}
 
 	public void syncWithFile () throws IOException
