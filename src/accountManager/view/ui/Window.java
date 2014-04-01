@@ -2,27 +2,22 @@ package accountManager.view.ui;
 
 import javax.swing.JFrame;
 
-import accountManager.controller.Controller;
-import accountManager.model.Model;
 import accountManager.view.View;
 
 @SuppressWarnings ("serial")
-public abstract class Window extends JFrame implements View
+public abstract class Window extends JFrame
 {
-	protected Controller controller;
-	protected Model model;
+	protected View view;
 
-	public Window (String title, Controller controller, Model model)
+	public Window (String title, View view)
 	{
 		super (title);
-		this.controller = controller;
-		this.model = model;
+		this.view = view;
 	}
 
-	@Override
-        public void close ()
-        {
-	        setVisible (false);
-	        dispose ();
-        }
+	public void close ()
+	{
+		setVisible (false);
+		dispose ();
+	}
 }

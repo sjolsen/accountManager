@@ -2,6 +2,7 @@ package accountManager.view.ui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.event.WindowEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -10,8 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import accountManager.controller.Controller;
-import accountManager.model.Model;
+import accountManager.view.View;
 
 @SuppressWarnings ("serial")
 public class MainWindow extends Window
@@ -26,19 +26,19 @@ public class MainWindow extends Window
 	private JButton save_button;
 	private JButton exit_button;
 
-	public MainWindow (Controller controller, Model model)
+	public MainWindow (View view)
 	{
-		super ("Account Manager", controller, model);
+		super ("Account Manager", view);
 		
 		panel = new JPanel ();
 		panel.setLayout (new BoxLayout (panel, BoxLayout.X_AXIS));
-		panel.setBorder (BorderFactory.createEmptyBorder(BORDER, BORDER, BORDER, BORDER));
+		panel.setBorder (BorderFactory.createEmptyBorder (BORDER, BORDER, BORDER, BORDER));
 		getContentPane ().add (panel);
 
-		selector = new AccountSelector (model.getAccounts ());
+		selector = new AccountSelector (view.getAccounts ());
 		panel.add (selector.getJComponent ());
 
-		panel.add (Box.createRigidArea (new Dimension(BORDER, 0)));
+		panel.add (Box.createRigidArea (new Dimension (BORDER, 0)));
 		
 		control_area = new JPanel ();
 		control_area.setLayout (new BoxLayout (control_area, BoxLayout.Y_AXIS));
@@ -52,7 +52,7 @@ public class MainWindow extends Window
 			@Override
 			public void onClicked ()
 			{
-				MainWindow.this.controller.save ();
+				MainWindow.this.view.save ();
 			}
 		};
 		getRootPane ().setDefaultButton (save_button);
@@ -60,7 +60,7 @@ public class MainWindow extends Window
 			@Override
 			public void onClicked ()
 			{
-				MainWindow.this.controller.exit ();
+				MainWindow.this.view.exit ();
 			}
 		};
 		
@@ -70,7 +70,15 @@ public class MainWindow extends Window
 		button_panel.add (save_button, BorderLayout.WEST);
 		control_area.add (button_panel, BorderLayout.EAST);
 
-		setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation (JFrame.DO_NOTHING_ON_CLOSE);
+		addWindowListener (new NullWindowListener () {
+			@Override
+			public void windowClosing (WindowEvent e)
+			{
+				MainWindow.this.view.exit ();
+			}
+		});
+		
 		pack ();
 		setVisible (true);
 	}

@@ -9,10 +9,15 @@ import accountManager.model.money.Money;
 public class Controller
 {
 	private Model model;
-	
+
 	public Controller (Model model)
 	{
 		this.model = model;
+	}
+
+	public Model getModel ()
+	{
+		return model;
 	}
 
 	public void withdraw (Account account, Money amount)
@@ -25,20 +30,8 @@ public class Controller
 		account.setMoney (account.getMoney ().plus (amount));
 	}
 
-	public void save ()
+	public void save () throws IOException
 	{
-		try
-                {
-	                model.syncWithFile ();
-                }
-                catch (IOException e)
-                {
-	                // TODO Auto-generated catch block
-	                e.printStackTrace();
-                }
-	}
-
-	public void exit ()
-	{
+		model.syncWithFile ();
 	}
 }
