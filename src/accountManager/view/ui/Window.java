@@ -15,8 +15,13 @@ public abstract class Window extends JFrame
 		this.view = view;
 		setDefaultCloseOperation (JFrame.DO_NOTHING_ON_CLOSE);
 	}
-
+	
 	public void close ()
+	{
+		view.close (this);
+	}
+
+	public void cleanup ()
 	{
 		setVisible (false);
 		dispose ();

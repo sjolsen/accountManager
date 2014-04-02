@@ -11,15 +11,16 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import accountManager.view.View;
+import accountManager.view.util.money.Currency;
 
 @SuppressWarnings ("serial")
 public class MainWindow extends Window
 {	
 	private class EditButton extends CallbackButton
 	{
-		private final View.Currency currency;
+		private final Currency currency;
 
-		public EditButton (String designator, View.Currency currency)
+		public EditButton (String designator, Currency currency)
 		{
 			super (String.format ("Edit in %s", designator));
 			this.currency = currency;
@@ -54,9 +55,9 @@ public class MainWindow extends Window
 
 		selector = new AccountSelector (view.getAccounts ());
 
-		USD_button = new EditButton ("USD", View.Currency.USD);
-		EUR_button = new EditButton ("EUR", View.Currency.EUR);
-		CNY_button = new EditButton ("CNY", View.Currency.CNY);
+		USD_button = new EditButton ("USD", Currency.USD);
+		EUR_button = new EditButton ("EUR", Currency.EUR);
+		CNY_button = new EditButton ("CNY", Currency.CNY);
 
 		save_button = new CallbackButton ("Save") {
 			@Override
@@ -70,7 +71,7 @@ public class MainWindow extends Window
 			@Override
 			public void onClicked ()
 			{
-				MainWindow.this.view.exit ();
+				close ();
 			}
 		};
 
@@ -78,7 +79,7 @@ public class MainWindow extends Window
 			@Override
 			public void windowClosing (WindowEvent e)
 			{
-				MainWindow.this.view.exit ();
+				close ();
 			}
 		});
 

@@ -1,4 +1,4 @@
-package accountManager.view.util;
+package accountManager.view.util.money;
 
 import java.util.Observer;
 
@@ -10,17 +10,17 @@ public abstract class MoneyManager
 {
 	private final Controller controller;
 	private final Account account;
-	
+
 	protected abstract double exchangeRate ();
 	public abstract String currencyLongSymbol ();
 	public abstract String currencyShortSymbol ();
-	
-	protected double fromUSD (Money money)
+
+	protected final double fromUSD (Money money)
 	{
 		return money.getAmount () * exchangeRate ();
 	}
-	
-	protected Money toUSD (double amount)
+
+	protected final Money toUSD (double amount)
 	{
 		return new Money (amount / exchangeRate ());
 	}
@@ -30,25 +30,24 @@ public abstract class MoneyManager
 		this.controller = controller;
 		this.account = account;
 	}
-	
-	public void addAccountObserver (Observer o)
-	{
-		account.addObserver (o);
-	}
-	
-	public double getAmount ()
+
+	public final double getAmount ()
 	{
 		return fromUSD (account.getMoney ());
 	}
-	
-	public void withdraw (double amount)
+
+	public final void withdraw (double amount)
 	{
 		controller.withdraw (account, toUSD (amount));
 	}
-	
-	public void deposit (double amount)
+
+	public final void deposit (double amount)
 	{
 		controller.deposit (account, toUSD (amount));
 	}
-	
+
+	public final void addAccountObserver (Observer o)
+	{
+		account.addObserver (o);
+	}
 }

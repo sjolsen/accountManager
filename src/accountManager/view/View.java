@@ -6,20 +6,26 @@ import javax.swing.JList;
 
 import accountManager.controller.Controller;
 import accountManager.model.account.Account;
+import accountManager.view.ui.EditWindow;
 import accountManager.view.ui.MainWindow;
+import accountManager.view.ui.Window;
+import accountManager.view.util.EditWindowMap;
+import accountManager.view.util.money.Currency;
 
 public class View
 {
 	private final Controller controller;
-	private JList <Account> account_list;
+	private final JList <Account> account_list;
 	
-	private MainWindow main_window;
+	private final MainWindow main_window;
+	private final EditWindowMap edit_windows;
 	
 	public View (Controller controller)
 	{
 		this.controller = controller;
 		this.account_list = new JList <Account> (controller.getModel ().getAccounts ());
 		this.main_window = new MainWindow (this, controller.getModel ().getFileName ());
+		this.edit_windows = new EditWindowMap (this);
 	}
 	
 	public JList <Account> getAccounts ()
@@ -27,16 +33,9 @@ public class View
 		return account_list;
 	}
 	
-	public enum Currency
-	{
-		USD,
-		EUR,
-		CNY
-	}
-	
 	public void edit (Account account, Currency currency)
 	{
-		System.out.format ("Edit account %d in %s\n", account.getID (), currency.name ());
+		edit_windows.raiseWindow (account, currency);
 	}
 	
 	public void save ()
@@ -51,10 +50,24 @@ public class View
 	                e.printStackTrace();
                 }
 	}
+	
+	public void close (Window window)
+	{
+		if (!window.isDisplayable ())
+			return;
+		if (window == main_window)
+		{
+			main_window.cleanup ();
+			exit ();
+		}
+		else if (window instanceof EditWindow)
+			edit_windows.closeWindow ((EditWindow) window);
+	}
 
 	public void exit ()
 	{
 		save ();
-		main_window.close ();
+		close (main_window);
+		edit_windows.closeAllWindows ();
 	}
 }
