@@ -21,7 +21,7 @@ public class AccountCellRenderer implements ListCellRenderer <Account>
 	
 	private static String formatMoney (Money money)
 	{
-		return String.format ("%s%.2f", money.currencyShortSymbol (), money.getAmount ());
+		return String.format ("$%.2f", money.getAmount ());
 	}
 	
 	@Override

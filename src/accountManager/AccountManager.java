@@ -8,7 +8,7 @@ import javax.swing.UIManager;
 import accountManager.controller.Controller;
 import accountManager.model.Model;
 import accountManager.model.account.Account;
-import accountManager.model.money.USDMoney;
+import accountManager.model.money.Money;
 import accountManager.view.View;
 
 public class AccountManager
@@ -43,7 +43,7 @@ public class AccountManager
 			Controller controller = new Controller (model);
 			
 			for (Account account : model.getAccounts ())
-				controller.deposit (account, new USDMoney (10));
+				controller.deposit (account, new Money (10));
 			controller.save ();
                 }
                 catch (Exception e)
@@ -61,7 +61,7 @@ public class AccountManager
 			Controller controller = new Controller (model);
 			
 			for (Account account : model.getAccounts ())
-				controller.withdraw (account, new USDMoney (10));
+				controller.withdraw (account, new Money (10));
 			controller.save ();
                 }
                 catch (Exception e)
