@@ -29,6 +29,7 @@ public class AccountList implements Observer, ListModel <Account>, Iterable <Acc
 			throw new DuplicateAccountException (account, accounts.elementAt (index));
 		index = -(index + 1); // binarySearch returns -index - 1
 		
+		account.addObserver (this);
 		accounts.add (index, account);
 		notifyListeners (ListDataEvent.INTERVAL_ADDED, index, index + 1);
 	}

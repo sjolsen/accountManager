@@ -28,6 +28,11 @@ public class View
 		this.edit_windows = new EditWindowMap (this);
 	}
 	
+	public Controller getController ()
+	{
+		return controller;
+	}
+	
 	public JList <Account> getAccounts ()
 	{
 		return account_list;
