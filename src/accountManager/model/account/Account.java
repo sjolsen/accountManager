@@ -38,7 +38,7 @@ public class Account extends Observable
 		if (money.getAmount () < 0)
 			throw new AccountUnderflowException (money, this.money);
 		this.money = money;
-		
+
 		setChanged ();
 		notifyObservers ();
 	}

@@ -16,10 +16,10 @@ public class View
 {
 	private final Controller controller;
 	private final JList <Account> account_list;
-	
+
 	private final MainWindow main_window;
 	private final EditWindowMap edit_windows;
-	
+
 	public View (Controller controller)
 	{
 		this.controller = controller;
@@ -27,35 +27,35 @@ public class View
 		this.main_window = new MainWindow (this, controller.getModel ().getFileName ());
 		this.edit_windows = new EditWindowMap (this);
 	}
-	
+
 	public Controller getController ()
 	{
 		return controller;
 	}
-	
+
 	public JList <Account> getAccounts ()
 	{
 		return account_list;
 	}
-	
+
 	public void edit (Account account, Currency currency)
 	{
 		edit_windows.raiseWindow (account, currency);
 	}
-	
+
 	public void save ()
 	{
 		try
-                {
-	                controller.save ();
-                }
-                catch (IOException e)
-                {
-	                // TODO Auto-generated catch block
-	                e.printStackTrace();
-                }
+		{
+			controller.save ();
+		}
+		catch (IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
-	
+
 	public void close (Window window)
 	{
 		if (!window.isDisplayable ())

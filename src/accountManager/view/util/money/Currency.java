@@ -8,7 +8,7 @@ public enum Currency
 	USD,
 	EUR,
 	CNY;
-	
+
 	public MoneyManager makeManager (Controller controller, Account account)
 	{
 		switch (this)

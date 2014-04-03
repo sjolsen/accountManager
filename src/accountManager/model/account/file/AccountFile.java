@@ -17,34 +17,34 @@ public class AccountFile
 {
 	private final File filename;
 	private final String pathname;
-	
+
 	public AccountFile (File filename) throws IOException
 	{
 		this.filename = filename;
 		this.pathname = filename.getCanonicalPath ();
 	}
-	
+
 	public String getPathname ()
 	{
 		return pathname;
 	}
-	
+
 	public AccountList readAllAccounts () throws MalformedAccountException, IOException, DuplicateAccountException
 	{
 		AccountList accounts = new AccountList ();
 		BufferedReader reader = new BufferedReader (new FileReader (filename));
-		
+
 		Account account;
 		while ((account = AccountSerializer.deserialize (reader)) != null)
-       			accounts.addAccount (account);
-        	
+			accounts.addAccount (account);
+
 		return accounts;
 	}
-	
+
 	public void writeAllAccounts (AccountList accounts) throws IOException
 	{
 		PrintWriter writer = new PrintWriter (new FileWriter (filename));
-		
+
 		for (Account account : accounts)
 			AccountSerializer.serialize (account, writer);
 	}

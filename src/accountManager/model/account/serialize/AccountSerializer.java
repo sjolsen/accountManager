@@ -44,5 +44,5 @@ public class AccountSerializer
 		double amount = Double.parseDouble (amount_string);
 
 		return new Account (ID, name, new Money (amount));
-	}	
+	}
 }

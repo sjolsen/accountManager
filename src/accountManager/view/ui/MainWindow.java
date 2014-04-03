@@ -2,8 +2,6 @@ package accountManager.view.ui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.event.WindowEvent;
-
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -15,7 +13,7 @@ import accountManager.view.util.money.Currency;
 
 @SuppressWarnings ("serial")
 public class MainWindow extends Window
-{	
+{
 	private class EditButton extends CallbackButton
 	{
 		private final Currency currency;
@@ -33,8 +31,6 @@ public class MainWindow extends Window
 		}
 	}
 
-	private static final int BORDER = 3;
-
 	private AccountSelector selector;
 
 	private JButton USD_button;
@@ -47,7 +43,7 @@ public class MainWindow extends Window
 	private JPanel panel;
 	private JPanel control_area;
 	private JPanel edit_panel;
-	private JPanel button_panel;	
+	private JPanel button_panel;
 
 	public MainWindow (View view, String pathname)
 	{
@@ -74,14 +70,6 @@ public class MainWindow extends Window
 				close ();
 			}
 		};
-
-		addWindowListener (new NullWindowListener () {
-			@Override
-			public void windowClosing (WindowEvent e)
-			{
-				close ();
-			}
-		});
 
 		buildUI ();
 	}

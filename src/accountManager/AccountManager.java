@@ -15,9 +15,9 @@ public class AccountManager
 {
 	public static void windowTest (File file)
 	{
-                try
-                {
-	                UIManager.setLookAndFeel (UIManager.getSystemLookAndFeelClassName ());
+		try
+		{
+			UIManager.setLookAndFeel (UIManager.getSystemLookAndFeelClassName ());
 			Model model = new Model (file);
 			final Controller controller = new Controller (model);
 			SwingUtilities.invokeAndWait (new Runnable () {
@@ -27,50 +27,50 @@ public class AccountManager
 					new View (controller);
 				}
 			});
-                }
-                catch (Exception e)
-                {
-	                // TODO Auto-generated catch block
-	                e.printStackTrace();
-                }
+		}
+		catch (Exception e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
-	
+
 	public static void depositTest (File file)
 	{
 		try
-                {
-	                Model model = new Model (file);
+		{
+			Model model = new Model (file);
 			Controller controller = new Controller (model);
-			
+
 			for (Account account : model.getAccounts ())
 				controller.deposit (account, new Money (10));
 			controller.save ();
-                }
-                catch (Exception e)
-                {
-	                // TODO Auto-generated catch block
-	                e.printStackTrace();
-                }
+		}
+		catch (Exception e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
-	
+
 	public static void withdrawTest (File file)
 	{
 		try
-                {
-	                Model model = new Model (file);
+		{
+			Model model = new Model (file);
 			Controller controller = new Controller (model);
-			
+
 			for (Account account : model.getAccounts ())
 				controller.withdraw (account, new Money (10));
 			controller.save ();
-                }
-                catch (Exception e)
-                {
-	                // TODO Auto-generated catch block
-	                e.printStackTrace();
-                }
+		}
+		catch (Exception e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
-	
+
 	public static void main (String [] args)
 	{
 		if (args.length < 1)
@@ -78,7 +78,7 @@ public class AccountManager
 			System.err.println ("Must specify an account file");
 			return;
 		}
-		
+
 		windowTest (new File (args [0]));
 	}
 }

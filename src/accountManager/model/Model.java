@@ -23,14 +23,14 @@ public class Model
 	{
 		return accounts;
 	}
-	
+
 	public String getFileName ()
 	{
 		return file.getPathname ();
 	}
 
 	public void syncWithFile () throws IOException
-        {
-	        file.writeAllAccounts (accounts);
-        }
+	{
+		file.writeAllAccounts (accounts);
+	}
 }

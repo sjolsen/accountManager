@@ -1,4 +1,4 @@
-1002 | Cabello Israel Z | 576.111111
+1002 | Cabello Israel Z | 0.000000
 1008 | Iftikhar Bushra | 155.797778
 1070 | Streeter Angela M | 34.436051
 1127 | Lowell Daniel I | 0.567800

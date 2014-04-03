@@ -14,7 +14,7 @@ public class AccountList implements Observer, ListModel <Account>, Iterable <Acc
 {
 	private final Vector <Account> accounts = new Vector <Account> ();
 	private final Vector <ListDataListener> listeners = new Vector <ListDataListener> ();
-	
+
 	private void notifyListeners (int type, int begin, int end)
 	{
 		ListDataEvent event = new ListDataEvent (this, type, begin, end);
@@ -28,7 +28,7 @@ public class AccountList implements Observer, ListModel <Account>, Iterable <Acc
 		if (index >= 0) // Account already exists
 			throw new DuplicateAccountException (account, accounts.elementAt (index));
 		index = -(index + 1); // binarySearch returns -index - 1
-		
+
 		account.addObserver (this);
 		accounts.add (index, account);
 		notifyListeners (ListDataEvent.INTERVAL_ADDED, index, index + 1);
@@ -67,8 +67,8 @@ public class AccountList implements Observer, ListModel <Account>, Iterable <Acc
 	}
 
 	@Override
-        public Iterator <Account> iterator ()
-        {
-	        return accounts.iterator ();
-        }
+	public Iterator <Account> iterator ()
+	{
+		return accounts.iterator ();
+	}
 }

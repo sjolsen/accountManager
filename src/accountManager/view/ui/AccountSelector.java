@@ -14,21 +14,21 @@ public class AccountSelector
 	public AccountSelector (JList <Account> accounts)
 	{
 		scroll_pane = new JScrollPane ();
-		
+
 		account_list = accounts;
 		account_list.setSelectedIndex (0);
-		
+
 		account_list.setCellRenderer (new AccountCellRenderer ());
- 		scroll_pane.setViewportView (account_list);
+		scroll_pane.setViewportView (account_list);
 	}
-	
+
 	public JComponent getJComponent ()
 	{
 		return scroll_pane;
 	}
 
 	public Account getSelectedAccount ()
-        {
-	        return account_list.getSelectedValue ();
-        }
+	{
+		return account_list.getSelectedValue ();
+	}
 }
