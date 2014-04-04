@@ -1,11 +1,13 @@
 package accountManager.view.ui;
 
 import java.awt.Dimension;
+
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import accountManager.model.account.Account;
 import accountManager.view.View;
@@ -19,10 +21,12 @@ public class EditWindow extends Window
 	private final Currency currency;
 	private final MoneyManager manager;
 
-	private JButton deposit_button;
-	private JButton withdraw_button;
+	private final JTextField amount_field;
+	private final JButton deposit_button;
+	private final JButton withdraw_button;
 
 	private JPanel panel;
+	private JPanel edit_panel;
 
 	public EditWindow (View view, Account account, Currency currency)
 	{
@@ -31,11 +35,13 @@ public class EditWindow extends Window
 		this.currency = currency;
 		this.manager = currency.makeManager (view.getController (), account);
 
+		amount_field = new JTextField ("0.00");
+
 		deposit_button = new CallbackButton ("Deposit") {
 			@Override
 			public void onClicked ()
 			{
-				manager.deposit (10);
+				manager.deposit (Double.parseDouble (amount_field.getText ()));
 			}
 		};
 
@@ -43,7 +49,7 @@ public class EditWindow extends Window
 			@Override
 			public void onClicked ()
 			{
-				manager.withdraw (10);
+				manager.withdraw (Double.parseDouble (amount_field.getText ()));
 			}
 		};
 
@@ -52,13 +58,17 @@ public class EditWindow extends Window
 
 	private void buildUI ()
 	{
-		panel = new JPanel ();
-		panel.setLayout (new BoxLayout (panel, BoxLayout.X_AXIS));
-		panel.setBorder (BorderFactory.createEmptyBorder (BORDER, BORDER, BORDER, BORDER));
+		edit_panel = new JPanel ();
+		edit_panel.setLayout (new BoxLayout (edit_panel, BoxLayout.X_AXIS));
+		edit_panel.setBorder (BorderFactory.createEmptyBorder (BORDER, BORDER, BORDER, BORDER));
+		edit_panel.add (withdraw_button);
+		edit_panel.add (Box.createRigidArea (new Dimension (BORDER, 0)));
+		edit_panel.add (deposit_button);
 
-		panel.add (withdraw_button);
-		panel.add (Box.createRigidArea (new Dimension (BORDER, 0)));
-		panel.add (deposit_button);
+		panel = new JPanel ();
+		panel.setLayout (new BoxLayout (panel, BoxLayout.Y_AXIS));
+		panel.add (amount_field);
+		panel.add (edit_panel);
 
 		getContentPane ().add (panel);
 		pack ();
