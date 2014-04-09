@@ -49,7 +49,11 @@ public class EditWindow extends Window
 				}
 				catch (AccountUnderflowException e)
 				{
-					JOptionPane.showMessageDialog (EditWindow.this, "Cannot withdraw that much");
+					JOptionPane.showMessageDialog (EditWindow.this, "Cannot deposit that much");
+				}
+				catch (NumberFormatException e)
+				{
+					JOptionPane.showMessageDialog (EditWindow.this, String.format ("\"%s\" is not a valid amount", amount_field.getText ()));
 				}
 			}
 		};
@@ -64,7 +68,11 @@ public class EditWindow extends Window
 				}
 				catch (AccountUnderflowException e)
 				{
-					JOptionPane.showMessageDialog (EditWindow.this, "Cannot deposit that much");
+					JOptionPane.showMessageDialog (EditWindow.this, "Cannot withdraw that much");
+				}
+				catch (NumberFormatException e)
+				{
+					JOptionPane.showMessageDialog (EditWindow.this, String.format ("\"%s\" is not a valid amount", amount_field.getText ()));
 				}
 			}
 		};
