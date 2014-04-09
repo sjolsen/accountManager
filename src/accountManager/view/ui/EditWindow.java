@@ -26,9 +26,11 @@ public class EditWindow extends Window
 	private final JTextField amount_field;
 	private final JButton deposit_button;
 	private final JButton withdraw_button;
+	private final JButton dismiss_button;
 
 	private JPanel panel;
 	private JPanel edit_panel;
+	private JPanel dismiss_panel;
 
 	public EditWindow (View view, Account account, Currency currency)
 	{
@@ -76,6 +78,14 @@ public class EditWindow extends Window
 				}
 			}
 		};
+		
+		dismiss_button = new CallbackButton ("Dismiss") {
+			@Override
+			public void onClicked ()
+			{
+				close ();
+			}
+		};
 
 		buildUI ();
 	}
@@ -88,11 +98,18 @@ public class EditWindow extends Window
 		edit_panel.add (withdraw_button);
 		edit_panel.add (Box.createRigidArea (new Dimension (BORDER, 0)));
 		edit_panel.add (deposit_button);
+		
+		dismiss_panel = new JPanel ();
+		dismiss_panel.setLayout (new BoxLayout (dismiss_panel, BoxLayout.X_AXIS));
+		dismiss_panel.add (Box.createHorizontalGlue ());
+		dismiss_panel.add (dismiss_button);
 
 		panel = new JPanel ();
 		panel.setLayout (new BoxLayout (panel, BoxLayout.Y_AXIS));
+		panel.setBorder (BorderFactory.createEmptyBorder (BORDER, BORDER, BORDER, BORDER));
 		panel.add (amount_field);
 		panel.add (edit_panel);
+		panel.add (dismiss_panel);
 
 		getContentPane ().add (panel);
 		pack ();
