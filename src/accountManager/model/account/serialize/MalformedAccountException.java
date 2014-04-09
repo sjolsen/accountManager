@@ -6,7 +6,7 @@ import java.text.ParseException;
 public class MalformedAccountException extends ParseException
 {
 	public MalformedAccountException (String text)
-        {
-	        super (text, 0);
-        }
+	{
+		super (text, 0);
+	}
 }

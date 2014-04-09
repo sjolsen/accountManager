@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 
 import accountManager.model.account.Account;
 import accountManager.model.account.AccountUnderflowException;
-import accountManager.model.money.USDMoney;
+import accountManager.model.money.Money;
 
 public class AccountSerializer
 {
@@ -16,7 +16,7 @@ public class AccountSerializer
 
 	public static void serialize (Account account, PrintWriter writer)
 	{
-		writer.printf ("%d | %s | %f\n", account.getID (), account.getName (), account.getMoney ().getCanonicalAmount ().getAmount ());
+		writer.printf ("%d | %s | %f\n", account.getID (), account.getName (), account.getMoney ().getAmount ());
 		writer.flush ();
 	}
 
@@ -45,12 +45,12 @@ public class AccountSerializer
 		double amount = Double.parseDouble (amount_string);
 
 		try
-                {
-	                return new Account (ID, name, new USDMoney (amount));
-                }
-                catch (AccountUnderflowException e)
-                {
-	                throw new MalformedAccountException (line);
-                }
-	}	
+		{
+			return new Account (ID, name, new Money (amount));
+		}
+		catch (AccountUnderflowException e)
+		{
+			throw new MalformedAccountException (line);
+		}
+	}
 }
