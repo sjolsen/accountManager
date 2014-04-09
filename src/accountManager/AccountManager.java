@@ -1,25 +1,44 @@
 package accountManager;
 
 import java.io.File;
+import java.io.IOException;
 
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
 import accountManager.controller.Controller;
 import accountManager.model.Model;
-import accountManager.model.account.Account;
-import accountManager.model.money.USDMoney;
+import accountManager.model.account.DuplicateAccountException;
+import accountManager.model.account.serialize.MalformedAccountException;
 import accountManager.view.View;
 
 public class AccountManager
 {
-	public static void windowTest (File file)
+	public static void runApp (File file)
 	{
-                try
-                {
-	                UIManager.setLookAndFeel (UIManager.getSystemLookAndFeelClassName ());
-			Model model = new Model (file);
-			final Controller controller = new Controller (model);
+		Model model = null;
+		try
+		{
+			model = new Model (file);
+		}
+		catch (MalformedAccountException e)
+		{
+			JOptionPane.showMessageDialog (null, String.format ("Malformed account: \"%s\"", e.getMessage ()));
+		}
+		catch (IOException e)
+		{
+			JOptionPane.showMessageDialog (null, "Could not read from file");
+		}
+		catch (DuplicateAccountException e)
+		{
+			JOptionPane.showMessageDialog (null, String.format ("Found duplicate account with ID %d", e.old_account.getID ()));
+		}
+
+		final Controller controller = new Controller (model);
+
+		try
+		{
 			SwingUtilities.invokeAndWait (new Runnable () {
 				@Override
 				public void run ()
@@ -27,50 +46,13 @@ public class AccountManager
 					new View (controller);
 				}
 			});
-                }
-                catch (Exception e)
-                {
-	                // TODO Auto-generated catch block
-	                e.printStackTrace();
-                }
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
 	}
-	
-	public static void depositTest (File file)
-	{
-		try
-                {
-	                Model model = new Model (file);
-			Controller controller = new Controller (model);
-			
-			for (Account account : model.getAccounts ())
-				controller.deposit (account, new USDMoney (10));
-			controller.save ();
-                }
-                catch (Exception e)
-                {
-	                // TODO Auto-generated catch block
-	                e.printStackTrace();
-                }
-	}
-	
-	public static void withdrawTest (File file)
-	{
-		try
-                {
-	                Model model = new Model (file);
-			Controller controller = new Controller (model);
-			
-			for (Account account : model.getAccounts ())
-				controller.withdraw (account, new USDMoney (10));
-			controller.save ();
-                }
-                catch (Exception e)
-                {
-	                // TODO Auto-generated catch block
-	                e.printStackTrace();
-                }
-	}
-	
+
 	public static void main (String [] args)
 	{
 		if (args.length < 1)
@@ -78,7 +60,15 @@ public class AccountManager
 			System.err.println ("Must specify an account file");
 			return;
 		}
-		
-		windowTest (new File (args [0]));
+
+		try
+		{
+			UIManager.setLookAndFeel (UIManager.getSystemLookAndFeelClassName ());
+		}
+		catch (Exception e)
+		{
+		}
+
+		runApp (new File (args [0]));
 	}
 }

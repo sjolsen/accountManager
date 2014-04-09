@@ -7,6 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import accountManager.model.account.Account;
+import accountManager.model.account.AccountUnderflowException;
 import accountManager.model.money.USDMoney;
 
 public class AccountSerializer
@@ -43,6 +44,13 @@ public class AccountSerializer
 			throw new MalformedAccountException (line);
 		double amount = Double.parseDouble (amount_string);
 
-		return new Account (ID, name, new USDMoney (amount));
+		try
+                {
+	                return new Account (ID, name, new USDMoney (amount));
+                }
+                catch (AccountUnderflowException e)
+                {
+	                throw new MalformedAccountException (line);
+                }
 	}	
 }

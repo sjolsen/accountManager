@@ -3,6 +3,7 @@ package accountManager.view;
 import java.io.IOException;
 
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 
 import accountManager.controller.Controller;
 import accountManager.model.account.Account;
@@ -47,8 +48,7 @@ public class View
                 }
                 catch (IOException e)
                 {
-	                // TODO Auto-generated catch block
-	                e.printStackTrace();
+	                JOptionPane.showMessageDialog (null, "Failed to save the database");
                 }
 	}
 

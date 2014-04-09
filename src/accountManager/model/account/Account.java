@@ -33,7 +33,7 @@ public class Account extends Observable
 		return money;
 	}
 
-	public void setMoney (Money money)
+	public void setMoney (Money money) throws AccountUnderflowException
 	{
 		if (money.getAmount () < 0)
 			throw new AccountUnderflowException (money, this.money);

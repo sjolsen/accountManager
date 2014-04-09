@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import accountManager.model.Model;
 import accountManager.model.account.Account;
+import accountManager.model.account.AccountUnderflowException;
 import accountManager.model.money.Money;
 
 public class Controller
@@ -20,12 +21,12 @@ public class Controller
 		return model;
 	}
 
-	public void withdraw (Account account, Money amount)
+	public void withdraw (Account account, Money amount) throws AccountUnderflowException
 	{
 		account.setMoney (account.getMoney ().minus (amount));
 	}
 
-	public void deposit (Account account, Money amount)
+	public void deposit (Account account, Money amount) throws AccountUnderflowException
 	{
 		account.setMoney (account.getMoney ().plus (amount));
 	}
