@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 import accountManager.model.account.Account;
 import accountManager.model.account.AccountUnderflowException;
@@ -44,7 +45,7 @@ public class EditWindow extends Window
 
 		field_label = new JLabel (manager.currencyShortSymbol ());
 		amount_field = new JTextField ("0.00");
-		amount_field.setHorizontalAlignment (JTextField.RIGHT);
+		amount_field.setHorizontalAlignment (SwingConstants.RIGHT);
 
 		deposit_button = new CallbackButton ("Deposit") {
 			@Override
@@ -83,7 +84,7 @@ public class EditWindow extends Window
 				}
 			}
 		};
-		
+
 		dismiss_button = new CallbackButton ("Dismiss") {
 			@Override
 			public void onClicked ()
@@ -102,12 +103,12 @@ public class EditWindow extends Window
 		text_panel.add (field_label);
 		text_panel.add (Box.createRigidArea (new Dimension(BORDER, 0)));
 		text_panel.add (amount_field);
-		
+
 		edit_panel = new JPanel ();
 		edit_panel.add (withdraw_button);
 		edit_panel.add (Box.createRigidArea (new Dimension (BORDER, 0)));
 		edit_panel.add (deposit_button);
-		
+
 		dismiss_panel = new JPanel ();
 		dismiss_panel.setLayout (new BoxLayout (dismiss_panel, BoxLayout.X_AXIS));
 		dismiss_panel.add (Box.createHorizontalGlue ());
