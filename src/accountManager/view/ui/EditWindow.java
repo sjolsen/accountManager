@@ -38,10 +38,11 @@ public class EditWindow extends Window
 
 	public EditWindow (View view, Account account, Currency currency)
 	{
-		super ("Dummy edit window", view);
+		super ("", view);
 		this.account = account;
 		this.currency = currency;
 		this.manager = currency.makeManager (view.getController (), account);
+		super.setTitle (String.format ("%s - %d - %s", account.getName (), account.getID (), manager.currencyLongSymbol ()));
 
 		field_label = new JLabel (manager.currencyShortSymbol ());
 		amount_field = new JTextField ("0.00");
