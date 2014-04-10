@@ -9,6 +9,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import accountManager.model.account.Account;
 import accountManager.view.View;
 import accountManager.view.util.money.Currency;
 
@@ -28,7 +29,8 @@ public class MainWindow extends Window
 		@Override
 		public void onClicked ()
 		{
-			MainWindow.this.view.edit (selector.getSelectedAccount (), currency);
+			for (Account a : selector.getSelectedAccounts ())
+				MainWindow.this.view.edit (a, currency);
 		}
 	}
 

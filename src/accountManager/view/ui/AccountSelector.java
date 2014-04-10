@@ -1,5 +1,7 @@
 package accountManager.view.ui;
 
+import java.util.Vector;
+
 import javax.swing.JComponent;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -28,8 +30,11 @@ public class AccountSelector
 		return scroll_pane;
 	}
 
-	public Account getSelectedAccount ()
+	public Vector <Account> getSelectedAccounts ()
 	{
-		return accounts.getElementAt (account_table.getSelectedRow ());
+		Vector <Account> selection = new Vector <Account> ();
+		for (int index : account_table.getSelectedRows ())
+			selection.add (accounts.getElementAt (index));
+		return selection;
 	}
 }
