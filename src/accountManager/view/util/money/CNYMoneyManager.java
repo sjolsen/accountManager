@@ -3,6 +3,9 @@ package accountManager.view.util.money;
 import accountManager.controller.Controller;
 import accountManager.model.account.Account;
 
+/**
+ * Manages money in Chinese Yuan
+ */
 public class CNYMoneyManager extends MoneyManager
 {
 	public CNYMoneyManager (Controller controller, Account account)

@@ -13,6 +13,9 @@ import accountManager.view.ui.Window;
 import accountManager.view.util.EditWindowMap;
 import accountManager.view.util.money.Currency;
 
+/**
+ * Manages the UI of the program
+ */
 public class View
 {
 	private final Controller controller;

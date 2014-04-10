@@ -10,6 +10,9 @@ import javax.swing.ListModel;
 import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListDataListener;
 
+/**
+ * The in-memory representation of the database's contents as a list of accounts
+ */
 public class AccountList implements Observer, ListModel <Account>, Iterable <Account>
 {
 	private final Vector <Account> accounts = new Vector <Account> ();

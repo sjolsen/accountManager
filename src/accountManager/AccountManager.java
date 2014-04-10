@@ -13,6 +13,9 @@ import accountManager.model.account.DuplicateAccountException;
 import accountManager.model.account.serialize.MalformedAccountException;
 import accountManager.view.View;
 
+/**
+ * A simple GUI program for manipulating a database of accounts
+ */
 public class AccountManager
 {
 	public static void runApp (File file)

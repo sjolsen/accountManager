@@ -1,5 +1,8 @@
 package accountManager.model.account;
 
+/**
+ * Indicates conflicting account entries in the database
+ */
 @SuppressWarnings ("serial")
 public class DuplicateAccountException extends Exception
 {

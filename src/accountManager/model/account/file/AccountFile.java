@@ -13,6 +13,9 @@ import accountManager.model.account.DuplicateAccountException;
 import accountManager.model.account.serialize.AccountSerializer;
 import accountManager.model.account.serialize.MalformedAccountException;
 
+/**
+ * Manages the reading of accounts from and writing of accounts to the database
+ */
 public class AccountFile
 {
 	private final File filename;

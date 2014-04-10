@@ -1,5 +1,8 @@
 package accountManager.model.money;
 
+/**
+ * Represents money in terms of USD
+ */
 public class Money
 {
 	private final double dollars;

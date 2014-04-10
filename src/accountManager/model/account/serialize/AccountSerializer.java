@@ -10,6 +10,9 @@ import accountManager.model.account.Account;
 import accountManager.model.account.AccountUnderflowException;
 import accountManager.model.money.Money;
 
+/**
+ * Handles the transformation between accounts and their database representations
+ */
 public class AccountSerializer
 {
 	private static final Pattern format = Pattern.compile ("^\\s*(\\d+)\\s*\\|\\s*([\\sa-zA-Z]+?)\\s*\\|\\s*(\\d*\\.?\\d+)\\s*$");

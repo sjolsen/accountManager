@@ -5,6 +5,9 @@ import java.util.Observable;
 
 import accountManager.model.money.Money;
 
+/**
+ * Represents an account and its attributes, satisfying the observer pattern
+ */
 public class Account extends Observable
 {
 	private final int ID;

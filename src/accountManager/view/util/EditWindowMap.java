@@ -8,6 +8,9 @@ import accountManager.view.View;
 import accountManager.view.ui.EditWindow;
 import accountManager.view.util.money.Currency;
 
+/**
+ * Responsible for maintaining handles to open edit windows, ensuring uniqueness for a given account/currency combination
+ */
 public class EditWindowMap
 {
 	private static class Key

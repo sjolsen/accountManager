@@ -12,6 +12,9 @@ import accountManager.model.account.Account;
 import accountManager.model.account.AccountList;
 import accountManager.model.money.Money;
 
+/**
+ * Responsible for interfacing Swing's table abstraction with the database
+ */
 public class AccountTableModel implements TableModel
 {
 	private final Vector <TableModelListener> listeners;

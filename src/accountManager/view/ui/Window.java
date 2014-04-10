@@ -7,6 +7,9 @@ import javax.swing.WindowConstants;
 
 import accountManager.view.View;
 
+/**
+ * A basic window element with the functionality specific to all windows of the program
+ */
 @SuppressWarnings ("serial")
 public abstract class Window extends JFrame
 {

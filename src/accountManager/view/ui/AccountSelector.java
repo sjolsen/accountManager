@@ -11,6 +11,9 @@ import javax.swing.table.DefaultTableCellRenderer;
 import accountManager.model.account.Account;
 import accountManager.model.account.AccountList;
 
+/**
+ * The UI element which presents a selectable list of accounts to the user
+ */
 public class AccountSelector
 {
 	private final AccountList accounts;

@@ -13,6 +13,9 @@ import accountManager.model.account.Account;
 import accountManager.view.View;
 import accountManager.view.util.money.Currency;
 
+/**
+ * The main UI element of the program
+ */
 @SuppressWarnings ("serial")
 public class MainWindow extends Window
 {

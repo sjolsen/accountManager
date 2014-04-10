@@ -2,6 +2,9 @@ package accountManager.model.account.serialize;
 
 import java.text.ParseException;
 
+/**
+ * Indicates a failure in database parsing
+ */
 @SuppressWarnings ("serial")
 public class MalformedAccountException extends ParseException
 {

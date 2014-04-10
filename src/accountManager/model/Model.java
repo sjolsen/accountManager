@@ -8,10 +8,13 @@ import accountManager.model.account.DuplicateAccountException;
 import accountManager.model.account.file.AccountFile;
 import accountManager.model.account.serialize.MalformedAccountException;
 
+/**
+ * Encapsulates the database as a dumb data interface
+ */
 public class Model
 {
-	private AccountFile file;
-	private AccountList accounts;
+	private final AccountFile file;
+	private final AccountList accounts;
 
 	public Model (File filename) throws MalformedAccountException, IOException, DuplicateAccountException
 	{

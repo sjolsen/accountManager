@@ -20,6 +20,9 @@ import accountManager.view.View;
 import accountManager.view.util.money.Currency;
 import accountManager.view.util.money.MoneyManager;
 
+/**
+ * The UI element which allows the user to edit an account in a specified currency
+ */
 @SuppressWarnings ("serial")
 public class EditWindow extends Window
 {

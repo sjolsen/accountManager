@@ -3,6 +3,9 @@ package accountManager.view.util.money;
 import accountManager.controller.Controller;
 import accountManager.model.account.Account;
 
+/**
+ * Manages money in US dollars
+ */
 public class USDMoneyManager extends MoneyManager
 {
 	public USDMoneyManager (Controller controller, Account account)

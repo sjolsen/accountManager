@@ -7,6 +7,9 @@ import accountManager.model.account.Account;
 import accountManager.model.account.AccountUnderflowException;
 import accountManager.model.money.Money;
 
+/**
+ * Provides a UI-friendly abstract interface to money, presenting it in some currency
+ */
 public abstract class MoneyManager
 {
 	private final Controller controller;

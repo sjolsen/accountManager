@@ -2,6 +2,9 @@ package accountManager.model.account;
 
 import accountManager.model.money.Money;
 
+/**
+ * Indicates an attempt to underflow an account's balance
+ */
 @SuppressWarnings ("serial")
 public class AccountUnderflowException extends Exception
 {
