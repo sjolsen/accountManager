@@ -2,11 +2,11 @@ package accountManager.view;
 
 import java.io.IOException;
 
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 
 import accountManager.controller.Controller;
 import accountManager.model.account.Account;
+import accountManager.model.account.AccountList;
 import accountManager.view.ui.EditWindow;
 import accountManager.view.ui.MainWindow;
 import accountManager.view.ui.Window;
@@ -16,7 +16,7 @@ import accountManager.view.util.money.Currency;
 public class View
 {
 	private final Controller controller;
-	private final JList <Account> account_list;
+	private final AccountList account_list;
 
 	private final MainWindow main_window;
 	private final EditWindowMap edit_windows;
@@ -24,7 +24,7 @@ public class View
 	public View (Controller controller)
 	{
 		this.controller = controller;
-		this.account_list = new JList <Account> (controller.getModel ().getAccounts ());
+		this.account_list = controller.getModel ().getAccounts ();
 		this.main_window = new MainWindow (this, controller.getModel ().getFileName ());
 		this.edit_windows = new EditWindowMap (this);
 	}
@@ -34,7 +34,7 @@ public class View
 		return controller;
 	}
 
-	public JList <Account> getAccounts ()
+	public AccountList getAccounts ()
 	{
 		return account_list;
 	}

@@ -1,27 +1,26 @@
 package accountManager.view.ui;
 
-import java.util.List;
-
 import javax.swing.JComponent;
-import javax.swing.JList;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
 import accountManager.model.account.Account;
+import accountManager.model.account.AccountList;
 
 public class AccountSelector
 {
+	private final AccountList accounts;
+
+	private final JTable account_table;
 	private final JScrollPane scroll_pane;
-	private final JList <Account> account_list;
 
-	public AccountSelector (JList <Account> accounts)
+	public AccountSelector (AccountList accounts)
 	{
+		this.accounts = accounts;
+
+		account_table = new JTable (new AccountTableModel (this.accounts));
 		scroll_pane = new JScrollPane ();
-
-		account_list = accounts;
-		account_list.setSelectedIndex (0);
-
-		account_list.setCellRenderer (new AccountCellRenderer ());
-		scroll_pane.setViewportView (account_list);
+		scroll_pane.setViewportView (account_table);
 	}
 
 	public JComponent getJComponent ()
@@ -29,8 +28,8 @@ public class AccountSelector
 		return scroll_pane;
 	}
 
-	public List <Account> getSelectedAccounts ()
+	public Account getSelectedAccount ()
 	{
-		return account_list.getSelectedValuesList ();
+		return accounts.getElementAt (account_table.getSelectedRow ());
 	}
 }
