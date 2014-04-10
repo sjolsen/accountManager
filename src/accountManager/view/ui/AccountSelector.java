@@ -1,5 +1,7 @@
 package accountManager.view.ui;
 
+import java.util.List;
+
 import javax.swing.JComponent;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
@@ -8,8 +10,8 @@ import accountManager.model.account.Account;
 
 public class AccountSelector
 {
-	private JScrollPane scroll_pane;
-	private JList <Account> account_list;
+	private final JScrollPane scroll_pane;
+	private final JList <Account> account_list;
 
 	public AccountSelector (JList <Account> accounts)
 	{
@@ -27,8 +29,8 @@ public class AccountSelector
 		return scroll_pane;
 	}
 
-	public Account getSelectedAccount ()
+	public List <Account> getSelectedAccounts ()
 	{
-		return account_list.getSelectedValue ();
+		return account_list.getSelectedValuesList ();
 	}
 }

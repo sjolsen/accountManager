@@ -2,12 +2,14 @@ package accountManager.view.ui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import accountManager.model.account.Account;
 import accountManager.view.View;
 import accountManager.view.util.money.Currency;
 
@@ -27,18 +29,19 @@ public class MainWindow extends Window
 		@Override
 		public void onClicked ()
 		{
-			MainWindow.this.view.edit (selector.getSelectedAccount (), currency);
+			for (Account a : selector.getSelectedAccounts ())
+				MainWindow.this.view.edit (a, currency);
 		}
 	}
 
-	private AccountSelector selector;
+	private final AccountSelector selector;
 
-	private JButton USD_button;
-	private JButton EUR_button;
-	private JButton CNY_button;
+	private final JButton USD_button;
+	private final JButton EUR_button;
+	private final JButton CNY_button;
 
-	private JButton save_button;
-	private JButton exit_button;
+	private final JButton save_button;
+	private final JButton exit_button;
 
 	private JPanel panel;
 	private JPanel control_area;
