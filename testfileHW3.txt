@@ -1,5 +1,5 @@
-1002 | Cabello Israel Z | 18.055556
-1008 | Iftikhar Bushra | 155.797778
+1002 | Cabello Israel Z | 19.055556
+1008 | Iftikhar Bushra | 0.004639
 1070 | Streeter Angela M | 34.436051
 1127 | Lowell Daniel I | 0.003356
 1131 | Komati Deepthi | 223245.000000

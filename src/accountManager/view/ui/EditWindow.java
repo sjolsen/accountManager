@@ -73,7 +73,10 @@ public class EditWindow extends Window
 			{
 				try
 				{
-					manager.deposit (Double.parseDouble (diff_field.getText ()));
+					Double amount = Double.parseDouble (diff_field.getText ());
+					if (amount < 0)
+						JOptionPane.showMessageDialog (EditWindow.this, "Cannot deposit a negative amount");
+					manager.deposit (amount);
 				}
 				catch (AccountUnderflowException e)
 				{
@@ -92,7 +95,10 @@ public class EditWindow extends Window
 			{
 				try
 				{
-					manager.withdraw (Double.parseDouble (diff_field.getText ()));
+					Double amount = Double.parseDouble (diff_field.getText ());
+					if (amount < 0)
+						JOptionPane.showMessageDialog (EditWindow.this, "Cannot withdraw a negative amount");
+					manager.withdraw (amount);
 				}
 				catch (AccountUnderflowException e)
 				{
