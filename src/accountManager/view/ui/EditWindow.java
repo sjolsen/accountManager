@@ -1,6 +1,8 @@
 package accountManager.view.ui;
 
 import java.awt.Dimension;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -25,15 +27,19 @@ public class EditWindow extends Window
 	private final Currency currency;
 	private final MoneyManager manager;
 
-	private final JLabel field_label;
-	private final JTextField amount_field;
+	private final JLabel balance_label;
+	private final JLabel balance_symbol;
+	private final JTextField balance_field;
+	private final JLabel diff_symbol;
+	private final JTextField diff_field;
 	private final JButton deposit_button;
 	private final JButton withdraw_button;
 	private final JButton dismiss_button;
 
 	private JPanel panel;
-	private JPanel text_panel;
-	private JPanel edit_panel;
+	private JPanel balance_panel;
+	private JPanel diff_panel;
+	private JPanel withdraw_deposit_panel;
 	private JPanel dismiss_panel;
 
 	public EditWindow (View view, Account account, Currency currency)
@@ -44,9 +50,22 @@ public class EditWindow extends Window
 		this.manager = currency.makeManager (view.getController (), account);
 		super.setTitle (String.format ("%s - %d - %s", account.getName (), account.getID (), manager.currencyLongSymbol ()));
 
-		field_label = new JLabel (manager.currencyShortSymbol ());
-		amount_field = new JTextField ("0.00");
-		amount_field.setHorizontalAlignment (SwingConstants.RIGHT);
+		balance_label = new JLabel ("Current balance");
+		balance_symbol = new JLabel (manager.currencyShortSymbol ());
+		balance_field = new JTextField (String.format ("%.2f", manager.getAmount ()));
+		balance_field.setEditable (false);
+		balance_field.setHorizontalAlignment (SwingConstants.RIGHT);
+		manager.addAccountObserver (new Observer () {
+			@Override
+			public void update (Observable o, Object arg)
+			{
+				balance_field.setText (String.format ("%.2f", manager.getAmount ()));
+			}
+		});
+
+		diff_symbol = new JLabel (manager.currencyShortSymbol ());
+		diff_field = new JTextField ("0.00");
+		diff_field.setHorizontalAlignment (SwingConstants.RIGHT);
 
 		deposit_button = new CallbackButton ("Deposit") {
 			@Override
@@ -54,7 +73,7 @@ public class EditWindow extends Window
 			{
 				try
 				{
-					manager.deposit (Double.parseDouble (amount_field.getText ()));
+					manager.deposit (Double.parseDouble (diff_field.getText ()));
 				}
 				catch (AccountUnderflowException e)
 				{
@@ -62,7 +81,7 @@ public class EditWindow extends Window
 				}
 				catch (NumberFormatException e)
 				{
-					JOptionPane.showMessageDialog (EditWindow.this, String.format ("\"%s\" is not a valid amount", amount_field.getText ()));
+					JOptionPane.showMessageDialog (EditWindow.this, String.format ("\"%s\" is not a valid amount", diff_field.getText ()));
 				}
 			}
 		};
@@ -73,7 +92,7 @@ public class EditWindow extends Window
 			{
 				try
 				{
-					manager.withdraw (Double.parseDouble (amount_field.getText ()));
+					manager.withdraw (Double.parseDouble (diff_field.getText ()));
 				}
 				catch (AccountUnderflowException e)
 				{
@@ -81,7 +100,7 @@ public class EditWindow extends Window
 				}
 				catch (NumberFormatException e)
 				{
-					JOptionPane.showMessageDialog (EditWindow.this, String.format ("\"%s\" is not a valid amount", amount_field.getText ()));
+					JOptionPane.showMessageDialog (EditWindow.this, String.format ("\"%s\" is not a valid amount", diff_field.getText ()));
 				}
 			}
 		};
@@ -99,16 +118,22 @@ public class EditWindow extends Window
 
 	private void buildUI ()
 	{
-		text_panel = new JPanel ();
-		text_panel.setLayout (new BoxLayout (text_panel, BoxLayout.X_AXIS));
-		text_panel.add (field_label);
-		text_panel.add (Box.createRigidArea (new Dimension(BORDER, 0)));
-		text_panel.add (amount_field);
+		balance_panel = new JPanel ();
+		balance_panel.setLayout (new BoxLayout (balance_panel, BoxLayout.X_AXIS));
+		balance_panel.add (balance_symbol);
+		balance_panel.add (Box.createRigidArea (new Dimension(BORDER, 0)));
+		balance_panel.add (balance_field);
 
-		edit_panel = new JPanel ();
-		edit_panel.add (withdraw_button);
-		edit_panel.add (Box.createRigidArea (new Dimension (BORDER, 0)));
-		edit_panel.add (deposit_button);
+		diff_panel = new JPanel ();
+		diff_panel.setLayout (new BoxLayout (diff_panel, BoxLayout.X_AXIS));
+		diff_panel.add (diff_symbol);
+		diff_panel.add (Box.createRigidArea (new Dimension(BORDER, 0)));
+		diff_panel.add (diff_field);
+
+		withdraw_deposit_panel = new JPanel ();
+		withdraw_deposit_panel.add (withdraw_button);
+		withdraw_deposit_panel.add (Box.createRigidArea (new Dimension (BORDER, 0)));
+		withdraw_deposit_panel.add (deposit_button);
 
 		dismiss_panel = new JPanel ();
 		dismiss_panel.setLayout (new BoxLayout (dismiss_panel, BoxLayout.X_AXIS));
@@ -118,8 +143,10 @@ public class EditWindow extends Window
 		panel = new JPanel ();
 		panel.setLayout (new BoxLayout (panel, BoxLayout.Y_AXIS));
 		panel.setBorder (BorderFactory.createEmptyBorder (BORDER, BORDER, BORDER, BORDER));
-		panel.add (text_panel);
-		panel.add (edit_panel);
+		panel.add (balance_label);
+		panel.add (balance_panel);
+		panel.add (diff_panel);
+		panel.add (withdraw_deposit_panel);
 		panel.add (dismiss_panel);
 
 		getContentPane ().add (panel);
