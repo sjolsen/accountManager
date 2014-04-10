@@ -3,8 +3,10 @@ package accountManager.view.ui;
 import java.util.Vector;
 
 import javax.swing.JComponent;
+import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 
 import accountManager.model.account.Account;
 import accountManager.model.account.AccountList;
@@ -20,7 +22,15 @@ public class AccountSelector
 	{
 		this.accounts = accounts;
 
+		DefaultTableCellRenderer align_left = new DefaultTableCellRenderer ();
+		DefaultTableCellRenderer align_right = new DefaultTableCellRenderer ();
+		align_left.setHorizontalAlignment (JLabel.LEFT);
+		align_right.setHorizontalAlignment (JLabel.RIGHT);
+
 		account_table = new JTable (new AccountTableModel (this.accounts));
+		account_table.getColumnModel ().getColumn (0).setCellRenderer (align_left);
+		account_table.getColumnModel ().getColumn (2).setCellRenderer (align_right);
+
 		scroll_pane = new JScrollPane ();
 		scroll_pane.setViewportView (account_table);
 	}
