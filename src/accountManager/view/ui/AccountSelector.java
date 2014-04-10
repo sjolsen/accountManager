@@ -30,6 +30,7 @@ public class AccountSelector
 		account_table = new JTable (new AccountTableModel (this.accounts));
 		account_table.getColumnModel ().getColumn (0).setCellRenderer (align_left);
 		account_table.getColumnModel ().getColumn (2).setCellRenderer (align_right);
+		account_table.setRowSelectionInterval (0, 0);
 
 		scroll_pane = new JScrollPane ();
 		scroll_pane.setViewportView (account_table);
