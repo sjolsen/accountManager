@@ -36,8 +36,15 @@ public abstract class Agent implements Observer {
 		state = State.stopped;
 	}
 
-	protected void setState(State state) {
-		this.state = state;
+	protected void setState(State state) 
+	{
+		synchronized (this)
+		{
+			State oldstate = this.state;
+			this.state = state;
+			if (oldstate == State.blocked)
+				this.notifyAll ();
+		}
 		System.err.format ("Agent %d entering state %s\n", id, state.name ());
 	}
 
@@ -46,14 +53,51 @@ public abstract class Agent implements Observer {
 	}
 
 	@Override
-	public void update(Observable arg0, Object arg1) {
+	public void update(Observable arg0, Object arg1)
+	{
 		if (state == State.blocked)
-		{
 			setState (State.running);
-			this.notifyAll ();
+	}
+	
+	public abstract boolean doTransaction ();
+
+	public void run ()
+	{
+		setState (State.running);
+		while (true)
+		{
+			if (state == State.stopped)
+				return;
+			if (doTransaction ())
+			{
+				synchronized (this)
+				{
+					++operations_performed;
+					amount_transferred = amount_transferred.plus (step);
+				}
+				try
+				{
+					Thread.sleep (1000);
+				}
+				catch (InterruptedException e)
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}				
+			}
+			else if (state == State.blocked)
+			{
+				synchronized (this)
+				{
+					try 
+					{
+						this.wait ();
+					}
+					catch (InterruptedException e) 
+					{
+					}
+				}
+			}
 		}
 	}
-
-	public abstract void run ();
-
 }

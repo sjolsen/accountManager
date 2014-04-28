@@ -1,6 +1,6 @@
 1002 | Cabello Israel Z | 0.000000
-1008 | Iftikhar Bushra | 128.020000
-1070 | Streeter Angela M | 34.436051
+1008 | Iftikhar Bushra | 8.020000
+1070 | Streeter Angela M | 4.436051
 1127 | Lowell Daniel I | 0.567800
-1131 | Komati Deepthi | 223085.000000
+1131 | Komati Deepthi | 199205.000000
 1262 | Meuer Benjamin T | 100.000000

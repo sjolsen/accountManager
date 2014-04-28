@@ -13,6 +13,7 @@ import accountManager.model.money.Money;
  */
 public class Controller
 {
+	int id = 0;
 	private final Model model;
 	private final Vector <Agent> agents = new Vector <Agent> ();
 
@@ -54,7 +55,7 @@ public class Controller
 	
 	public Agent spawnWithdrawAgent (Account account, Money step)
 	{
-		final Agent agent = new WithdrawAgent (this, 0, step, account);
+		final Agent agent = new WithdrawAgent (this, id++, step, account);
 		agents.add (agent);
 		
 		new Thread (new Runnable () {
