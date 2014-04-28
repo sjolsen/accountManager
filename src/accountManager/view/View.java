@@ -5,8 +5,11 @@ import java.io.IOException;
 import javax.swing.JOptionPane;
 
 import accountManager.controller.Controller;
+import accountManager.controller.WithdrawAgent;
 import accountManager.model.account.Account;
 import accountManager.model.account.AccountList;
+import accountManager.model.account.AccountUnderflowException;
+import accountManager.model.money.Money;
 import accountManager.view.ui.EditWindow;
 import accountManager.view.ui.MainWindow;
 import accountManager.view.ui.Window;
@@ -77,5 +80,21 @@ public class View
 		save ();
 		close (main_window);
 		edit_windows.closeAllWindows ();
+	}
+
+	public void spawnWithdrawAgent (final Account a, final Money money)
+	{
+		new Thread (new Runnable () {
+			@Override
+			public void run ()
+			{
+				try {
+					new WithdrawAgent (controller, 0, money, a).run ();
+				} catch (AccountUnderflowException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}).start ();
 	}
 }

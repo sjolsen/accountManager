@@ -27,6 +27,7 @@ public class WithdrawAgent implements Observer
 	private void setState (State state)
 	{
 		this.state = state;
+		System.err.format ("Agent %d entering state %s\n", id, state.name ());
 	}
 	
 	public WithdrawAgent (Controller controller, int id, Money step, Account account)
@@ -47,7 +48,7 @@ public class WithdrawAgent implements Observer
 		setState (State.running);
 		while (true)
 		{
-			if (state != State.stopped)
+			if (state == State.stopped)
 				return;
 			if (account.getMoney ().minus (step).getAmount () < 0)
 			{
@@ -63,21 +64,19 @@ public class WithdrawAgent implements Observer
 			}
 			else
 			{
-				try
+				if (controller.withdraw (account, account.getMoney (), step))
 				{
-					while (!controller.withdraw (account, account.getMoney (), step))
+					synchronized (this)
 					{
+						++operations_performed;
+						amount_transferred = amount_transferred.plus (step);
 					}
-					Thread.sleep (1000);
-				}
-				catch (InterruptedException e)
-				{
-				}
-				
-				synchronized (this)
-				{
-					++operations_performed;
-					amount_transferred = amount_transferred.plus (step);
+					try {
+						Thread.sleep (1000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 			}
 		}

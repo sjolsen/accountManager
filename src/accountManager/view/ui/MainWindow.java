@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import accountManager.model.account.Account;
+import accountManager.model.money.Money;
 import accountManager.view.View;
 import accountManager.view.util.money.Currency;
 
@@ -65,7 +66,14 @@ public class MainWindow extends Window
 		EUR_button = new EditButton ("EUR", Currency.EUR);
 		CNY_button = new EditButton ("CNY", Currency.CNY);
 
-		withdraw_agent_button = new JButton ("Create withdraw agent");
+		withdraw_agent_button = new CallbackButton ("Create withdraw agent") {
+			@Override
+			public void onClicked ()
+			{
+				for (Account a : selector.getSelectedAccounts())
+					MainWindow.this.view.spawnWithdrawAgent (a, new Money (10));
+			}
+		};
 		deposit_agent_button = new JButton ("Create deposit agent");
 
 		save_button = new CallbackButton ("Save") {
