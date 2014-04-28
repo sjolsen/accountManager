@@ -43,12 +43,16 @@ public class MainWindow extends Window
 	private final JButton EUR_button;
 	private final JButton CNY_button;
 
+	private final JButton withdraw_agent_button;
+	private final JButton deposit_agent_button;
+
 	private final JButton save_button;
 	private final JButton exit_button;
 
 	private JPanel panel;
 	private JPanel control_area;
 	private JPanel edit_panel;
+	private JPanel agent_panel;
 	private JPanel button_panel;
 
 	public MainWindow (View view, String pathname)
@@ -60,6 +64,9 @@ public class MainWindow extends Window
 		USD_button = new EditButton ("USD", Currency.USD);
 		EUR_button = new EditButton ("EUR", Currency.EUR);
 		CNY_button = new EditButton ("CNY", Currency.CNY);
+
+		withdraw_agent_button = new JButton ("Create withdraw agent");
+		deposit_agent_button = new JButton ("Create deposit agent");
 
 		save_button = new CallbackButton ("Save") {
 			@Override
@@ -88,6 +95,11 @@ public class MainWindow extends Window
 		edit_panel.add (EUR_button);
 		edit_panel.add (CNY_button);
 
+		agent_panel = new JPanel ();
+		agent_panel.setLayout (new BoxLayout (agent_panel, BoxLayout.Y_AXIS));
+		agent_panel.add (withdraw_agent_button);
+		agent_panel.add (deposit_agent_button);
+
 		button_panel = new JPanel ();
 		button_panel.setLayout (new BoxLayout (button_panel, BoxLayout.X_AXIS));
 		button_panel.add (Box.createHorizontalGlue ());
@@ -97,7 +109,8 @@ public class MainWindow extends Window
 
 		control_area = new JPanel ();
 		control_area.setLayout (new BorderLayout (BORDER, BORDER));
-		control_area.add (edit_panel, BorderLayout.CENTER);
+		control_area.add (edit_panel, BorderLayout.NORTH);
+		control_area.add (agent_panel, BorderLayout.CENTER);
 		control_area.add (button_panel, BorderLayout.SOUTH);
 
 		panel = new JPanel ();
