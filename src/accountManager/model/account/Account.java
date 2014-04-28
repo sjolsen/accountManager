@@ -18,7 +18,10 @@ public class Account extends Observable
 	{
 		this.ID = ID;
 		this.name = name;
-		setMoney (money);
+		this.money = new Money (0);
+		while (!casSetMoney (this.money, money))
+		{
+		}
 	}
 
 	public int getID ()
@@ -36,14 +39,20 @@ public class Account extends Observable
 		return money;
 	}
 
-	public void setMoney (Money money) throws AccountUnderflowException
+	public boolean casSetMoney (Money old_money, Money new_money) throws AccountUnderflowException
 	{
-		if (money.getAmount () < 0)
-			throw new AccountUnderflowException (money, this.money);
-		this.money = money;
+		synchronized (this)
+		{
+			if (old_money.getAmount() != this.money.getAmount())
+				return false;
+			if (new_money.getAmount () < 0)
+				throw new AccountUnderflowException (new_money, this.money);
+			this.money = new_money;
+		}
 
 		setChanged ();
 		notifyObservers ();
+		return true;
 	}
 
 	public static class CompareByID implements Comparator <Account>

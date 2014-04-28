@@ -42,12 +42,16 @@ public abstract class MoneyManager
 
 	public final void withdraw (double amount) throws AccountUnderflowException
 	{
-		controller.withdraw (account, toUSD (amount));
+		while (!controller.withdraw (account, account.getMoney(), toUSD (amount)))
+		{
+		}
 	}
 
 	public final void deposit (double amount) throws AccountUnderflowException
 	{
-		controller.deposit (account, toUSD (amount));
+		while (!controller.deposit (account, account.getMoney(), toUSD (amount)))
+		{
+		}
 	}
 
 	public final void addAccountObserver (Observer o)
