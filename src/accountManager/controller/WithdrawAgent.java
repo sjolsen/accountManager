@@ -13,7 +13,7 @@ public class WithdrawAgent extends Agent implements Observer
 		super (controller, id, step, account);
 	}
 	
-	public void run () throws AccountUnderflowException
+	public void run ()
 	{
 		setState (State.running);
 		while (true)
@@ -34,19 +34,24 @@ public class WithdrawAgent extends Agent implements Observer
 			}
 			else
 			{
-				if (controller.withdraw (account, account.getMoney (), step))
-				{
-					synchronized (this)
+				try {
+					if (controller.withdraw (account, account.getMoney (), step))
 					{
-						++operations_performed;
-						amount_transferred = amount_transferred.plus (step);
+						synchronized (this)
+						{
+							++operations_performed;
+							amount_transferred = amount_transferred.plus (step);
+						}
+						try {
+							Thread.sleep (1000);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 					}
-					try {
-						Thread.sleep (1000);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+				} catch (AccountUnderflowException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 			}
 		}

@@ -6,7 +6,7 @@ import java.util.Observer;
 import accountManager.model.account.Account;
 import accountManager.model.money.Money;
 
-public class Agent implements Observer {
+public abstract class Agent implements Observer {
 
 	protected final Controller controller;
 	protected final int id;
@@ -53,5 +53,7 @@ public class Agent implements Observer {
 			this.notifyAll ();
 		}
 	}
+
+	public abstract void run ();
 
 }

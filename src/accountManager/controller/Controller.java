@@ -1,6 +1,7 @@
 package accountManager.controller;
 
 import java.io.IOException;
+import java.util.Vector;
 
 import accountManager.model.Model;
 import accountManager.model.account.Account;
@@ -13,6 +14,7 @@ import accountManager.model.money.Money;
 public class Controller
 {
 	private final Model model;
+	private final Vector <Agent> agents = new Vector <Agent> ();
 
 	public Controller (Model model)
 	{
@@ -49,9 +51,30 @@ public class Controller
 	{
 		return account.casSetMoney (old_balance, old_balance.plus (amount));
 	}
+	
+	public Agent spawnWithdrawAgent (Account account, Money step)
+	{
+		final Agent agent = new WithdrawAgent (this, 0, step, account);
+		agents.add (agent);
+		
+		new Thread (new Runnable () {
+			@Override
+			public void run ()
+			{
+				agent.run ();
+			}
+		}).start ();
+		
+		return agent;
+	}
 
 	public void save () throws IOException
 	{
 		model.syncWithFile ();
+	}
+
+	public void cleanup() {
+		for (Agent a : agents)
+			a.stop ();
 	}
 }
