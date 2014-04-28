@@ -24,14 +24,30 @@ public class Controller
 		return model;
 	}
 
-	public void withdraw (Account account, Money amount) throws AccountUnderflowException
+	/**
+	 * Performs an atomic withdraw operation
+	 * @param account The account from which to withdraw
+	 * @param old_balance The previous account balance
+	 * @param amount The amount of money to withdraw
+	 * @return Whether the withdrawal was successful
+	 * @throws AccountUnderflowException
+	 */
+	public boolean withdraw (Account account, Money old_balance, Money amount) throws AccountUnderflowException
 	{
-		account.setMoney (account.getMoney ().minus (amount));
+		return account.casSetMoney (old_balance, old_balance.minus (amount));
 	}
 
-	public void deposit (Account account, Money amount) throws AccountUnderflowException
+	/**
+	 * Performs an atomic deposit operation
+	 * @param account the account to which to deposit
+	 * @param old_balance The previous account balance
+	 * @param amount The amount of money to deposit
+	 * @return Whether the deposit was successful
+	 * @throws AccountUnderflowException
+	 */
+	public boolean deposit (Account account, Money old_balance, Money amount) throws AccountUnderflowException
 	{
-		account.setMoney (account.getMoney ().plus (amount));
+		return account.casSetMoney (old_balance, old_balance.plus (amount));
 	}
 
 	public void save () throws IOException
