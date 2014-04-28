@@ -74,7 +74,14 @@ public class MainWindow extends Window
 					MainWindow.this.view.spawnWithdrawAgent (a, new Money (10));
 			}
 		};
-		deposit_agent_button = new JButton ("Create deposit agent");
+		deposit_agent_button = new CallbackButton ("Create deposit agent") {
+			@Override
+			public void onClicked ()
+			{
+				for (Account a : selector.getSelectedAccounts())
+					MainWindow.this.view.spawnDepositAgent (a, new Money (10));
+			}
+		};
 
 		save_button = new CallbackButton ("Save") {
 			@Override

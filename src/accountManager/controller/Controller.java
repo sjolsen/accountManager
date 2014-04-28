@@ -48,14 +48,37 @@ public class Controller
 	 * @return Whether the deposit was successful
 	 * @throws AccountUnderflowException
 	 */
-	public boolean deposit (Account account, Money old_balance, Money amount) throws AccountUnderflowException
+	public boolean deposit (Account account, Money old_balance, Money amount)
 	{
-		return account.casSetMoney (old_balance, old_balance.plus (amount));
+		try
+		{
+			return account.casSetMoney (old_balance, old_balance.plus (amount));
+		}
+		catch (AccountUnderflowException e)
+		{
+			return false;
+		}
 	}
 	
 	public Agent spawnWithdrawAgent (Account account, Money step)
 	{
 		final Agent agent = new WithdrawAgent (this, id++, step, account);
+		agents.add (agent);
+		
+		new Thread (new Runnable () {
+			@Override
+			public void run ()
+			{
+				agent.run ();
+			}
+		}).start ();
+		
+		return agent;
+	}
+
+	public Agent spawnDepositAgent (Account account, Money step)
+	{
+		final Agent agent = new DepositAgent (this, id++, step, account);
 		agents.add (agent);
 		
 		new Thread (new Runnable () {

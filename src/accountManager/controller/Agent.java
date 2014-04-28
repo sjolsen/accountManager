@@ -6,8 +6,8 @@ import java.util.Observer;
 import accountManager.model.account.Account;
 import accountManager.model.money.Money;
 
-public abstract class Agent implements Observer {
-
+public abstract class Agent implements Observer
+{
 	protected final Controller controller;
 	protected final int id;
 	protected final Money step;

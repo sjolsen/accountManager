@@ -85,4 +85,9 @@ public class View
 	{
 		controller.spawnWithdrawAgent (a, money);
 	}
+
+	public void spawnDepositAgent (final Account a, final Money money)
+	{
+		controller.spawnDepositAgent (a, money);
+	}
 }
